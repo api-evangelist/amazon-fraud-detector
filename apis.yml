@@ -8,11 +8,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - AWS
+  - Financial Services
   - Fraud Detection
   - Machine Learning
   - Security
-  - Financial Services
-  - AWS
 url: >-
   https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/apis.yml
 created: '2026-03-16'
