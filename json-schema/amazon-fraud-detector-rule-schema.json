@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-schema/amazon-fraud-detector-rule-schema.json",
+  "title": "Rule",
+  "description": "A Fraud Detector rule that maps model scores and event variables to outcomes.",
+  "type": "object",
+  "properties": {
+    "ruleId": {
+      "type": "string",
+      "description": "Unique rule identifier."
+    },
+    "detectorId": {
+      "type": "string",
+      "description": "Detector this rule belongs to."
+    },
+    "ruleVersion": {
+      "type": "string",
+      "description": "Version of the rule."
+    },
+    "description": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "DETECTORPL"
+      ],
+      "description": "Rule expression language."
+    },
+    "expression": {
+      "type": "string",
+      "description": "Rule expression evaluated against event variables and model scores."
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Outcomes triggered when the rule matches."
+    },
+    "arn": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ruleId",
+    "detectorId",
+    "expression",
+    "language",
+    "outcomes"
+  ]
+}

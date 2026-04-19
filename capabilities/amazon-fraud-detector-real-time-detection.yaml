@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon Fraud Detector Real-Time Detection
+  description: Orchestrate ML models and business rules for real-time transaction fraud scoring and decision-making.
+  tags:
+  - Fraud Detection
+  - Machine Learning
+  - Real-Time
+  - Financial Security
+  - AWS
+binds:
+- namespace: env
+  keys:
+    AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+    AWS_REGION: AWS_REGION
+capability:
+  consumes:
+  - namespace: frauddetector
+    ref: capabilities/shared/fraud-detector.yaml
+  exposes:
+  - type: rest
+    port: 8080
+  - type: mcp
+    port: 9090
+  tools:
+  - name: putDetector
+    description: Create or update a fraud detector
+    inputSchema:
+      type: object
+      properties:
+        detectorId:
+          type: string
+        eventTypeName:
+          type: string
+        description:
+          type: string
+      required:
+      - detectorId
+      - eventTypeName
+  - name: getDetectors
+    description: Get one or all detectors
+    inputSchema:
+      type: object
+      properties:
+        detectorId:
+          type: string
+        nextToken:
+          type: string
+        maxResults:
+          type: integer
+  - name: deleteDetector
+    description: Delete a detector
+    inputSchema:
+      type: object
+      properties:
+        detectorId:
+          type: string
+      required:
+      - detectorId
+  - name: putModel
+    description: Create or update a fraud detection ML model
+    inputSchema:
+      type: object
+      properties:
+        modelId:
+          type: string
+        modelType:
+          type: string
+        eventTypeName:
+          type: string
+      required:
+      - modelId
+      - modelType
+      - eventTypeName
+  - name: getModels
+    description: Get one or all fraud detection models
+    inputSchema:
+      type: object
+      properties:
+        modelId:
+          type: string
+        modelType:
+          type: string
+        nextToken:
+          type: string
+  - name: createRule
+    description: Create a rule for a detector
+    inputSchema:
+      type: object
+      properties:
+        ruleId:
+          type: string
+        detectorId:
+          type: string
+        expression:
+          type: string
+        language:
+          type: string
+        outcomes:
+          type: array
+      required:
+      - ruleId
+      - detectorId
+      - expression
+      - language
+      - outcomes
+  - name: getRules
+    description: Get rules for a detector
+    inputSchema:
+      type: object
+      properties:
+        detectorId:
+          type: string
+        ruleId:
+          type: string
+      required:
+      - detectorId
+  - name: getEventPrediction
+    description: Get real-time fraud prediction for an event
+    inputSchema:
+      type: object
+      properties:
+        detectorId:
+          type: string
+        eventId:
+          type: string
+        eventTypeName:
+          type: string
+        eventTimestamp:
+          type: string
+        entities:
+          type: array
+        eventVariables:
+          type: object
+      required:
+      - detectorId
+      - eventId
+      - eventTypeName
+      - eventTimestamp
+      - entities
+      - eventVariables
+  - name: putEventType
+    description: Create or update an event type schema
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        eventVariables:
+          type: array
+        labels:
+          type: array
+        entityTypes:
+          type: array
+      required:
+      - name
+      - eventVariables
+      - labels
+      - entityTypes
+  - name: getEventTypes
+    description: Get event types
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        nextToken:
+          type: string
+  - name: putLabel
+    description: Create or update a fraud label
+    inputSchema:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+  - name: listTagsForResource
+    description: List tags for a Fraud Detector resource
+    inputSchema:
+      type: object
+      properties:
+        resourceARN:
+          type: string
+      required:
+      - resourceARN
+  - name: tagResource
+    description: Tag a Fraud Detector resource
+    inputSchema:
+      type: object
+      properties:
+        resourceARN:
+          type: string
+        tags:
+          type: array
+      required:
+      - resourceARN
+      - tags

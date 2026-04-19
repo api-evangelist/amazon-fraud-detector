@@ -1,0 +1,83 @@
+vocabulary:
+  id: amazon-fraud-detector-vocabulary
+  name: Amazon Fraud Detector Vocabulary
+  description: Controlled vocabulary for Amazon Fraud Detector real-time ML fraud detection.
+  version: 1.0.0
+  provider: Amazon Web Services
+  resources:
+  - name: Detector
+    description: Orchestrates ML models and rules to generate fraud predictions for events.
+    operations:
+    - putDetector
+    - getDetectors
+    - deleteDetector
+  - name: Model
+    description: ML model trained on labeled event data to score fraud probability.
+    operations:
+    - putModel
+    - getModels
+    - deleteModel
+    - createModelVersion
+    - trainModelVersion
+  - name: Rule
+    description: A conditional expression using model scores and event variables to trigger outcomes.
+    operations:
+    - createRule
+    - getRules
+    - updateRule
+    - deleteRule
+  - name: EventType
+    description: Schema defining the variables, labels, and entity types for a class of events.
+    operations:
+    - putEventType
+    - getEventTypes
+    - deleteEventType
+  - name: Label
+    description: A classification label (e.g., fraud, legit) used to annotate historical events.
+    operations:
+    - putLabel
+    - getLabels
+    - deleteLabel
+  - name: Tag
+    description: Key-value metadata label applied to Fraud Detector resources.
+    operations:
+    - listTagsForResource
+    - tagResource
+    - untagResource
+  actions:
+  - name: put
+    description: Create or update a resource.
+  - name: get
+    description: Retrieve one or more resources.
+  - name: create
+    description: Create a new resource.
+  - name: delete
+    description: Remove a resource.
+  - name: train
+    description: Initiate ML model training.
+  - name: tag
+    description: Attach metadata to a resource.
+  concepts:
+  - term: Fraud Score
+    definition: A numeric output (0-1000) from an ML model indicating the probability that an event is fraudulent.
+  - term: DETECTORPL
+    definition: The Amazon Fraud Detector rule language for writing conditional expressions.
+  - term: Outcome
+    definition: An action label returned when a rule fires (e.g., block, review, allow).
+  - term: Online Fraud Insights (OFI)
+    definition: An ML model type optimized for detecting real-time online account and payment fraud.
+  - term: Transaction Fraud Insights (TFI)
+    definition: An ML model type for detecting fraud in financial transaction flows.
+  - term: Account Takeover Insights (ATI)
+    definition: An ML model type for detecting unauthorized account access and takeover fraud.
+  - term: Entity Type
+    definition: The subject of an event (e.g., customer, account) used for fraud scoring context.
+  - term: Event Variable
+    definition: A named attribute of an event (e.g., ip_address, transaction_amount) used as model input.
+  tags:
+  - Fraud Detection
+  - Machine Learning
+  - Security
+  - Financial Services
+  - Real-Time
+  - AWS

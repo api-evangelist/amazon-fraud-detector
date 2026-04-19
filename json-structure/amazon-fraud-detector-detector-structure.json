@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-structure/amazon-fraud-detector-detector-structure.json",
+  "name": "Detector",
+  "description": "An Amazon Fraud Detector that orchestrates ML models and business rules for real-time fraud decisions.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "detectorId",
+      "type": "string",
+      "description": "Unique identifier for the detector.",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Optional description of the detector."
+    },
+    {
+      "name": "eventTypeName",
+      "type": "string",
+      "description": "The name of the event type associated with the detector.",
+      "required": true
+    },
+    {
+      "name": "lastUpdatedTime",
+      "type": "datetime",
+      "description": ""
+    },
+    {
+      "name": "createdTime",
+      "type": "datetime",
+      "description": ""
+    },
+    {
+      "name": "arn",
+      "type": "string",
+      "description": "ARN of the detector."
+    }
+  ]
+}

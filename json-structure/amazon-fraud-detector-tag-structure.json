@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-structure/amazon-fraud-detector-tag-structure.json",
+  "name": "Tag",
+  "description": "A key-value metadata label applied to an Amazon Fraud Detector resource.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "key",
+      "type": "string",
+      "description": "Tag key.",
+      "required": true
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Tag value.",
+      "required": true
+    }
+  ]
+}

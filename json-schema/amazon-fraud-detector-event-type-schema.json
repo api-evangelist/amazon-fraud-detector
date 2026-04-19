@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-schema/amazon-fraud-detector-event-type-schema.json",
+  "title": "EventType",
+  "description": "A schema defining the structure and variables of events analyzed by Amazon Fraud Detector.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the event type."
+    },
+    "description": {
+      "type": "string"
+    },
+    "eventVariables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Variables included in each event of this type."
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fraud/legit classification labels for this event type."
+    },
+    "entityTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Entity types (e.g., customer, account) involved in this event."
+    },
+    "eventIngestion": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "arn": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "eventVariables",
+    "labels",
+    "entityTypes"
+  ]
+}

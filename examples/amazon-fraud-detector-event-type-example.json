@@ -1,0 +1,20 @@
+{
+  "name": "transaction",
+  "description": "Payment transaction event type",
+  "eventVariables": [
+    "transaction_amount",
+    "ip_address",
+    "email_address",
+    "card_bin",
+    "billing_zip"
+  ],
+  "labels": [
+    "fraud",
+    "legit"
+  ],
+  "entityTypes": [
+    "customer"
+  ],
+  "eventIngestion": "ENABLED",
+  "arn": "arn:aws:frauddetector:us-east-1:123456789012:event-type/transaction"
+}

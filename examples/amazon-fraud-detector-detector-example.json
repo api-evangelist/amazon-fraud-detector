@@ -1,0 +1,8 @@
+{
+  "detectorId": "payment-fraud-detector",
+  "description": "Real-time payment fraud detection",
+  "eventTypeName": "transaction",
+  "arn": "arn:aws:frauddetector:us-east-1:123456789012:detector/payment-fraud-detector",
+  "lastUpdatedTime": "2025-06-01T10:00:00Z",
+  "createdTime": "2025-01-01T08:00:00Z"
+}

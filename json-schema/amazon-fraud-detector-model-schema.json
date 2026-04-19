@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-schema/amazon-fraud-detector-model-schema.json",
+  "title": "Model",
+  "description": "An Amazon Fraud Detector ML model trained to score transactions for fraud risk.",
+  "type": "object",
+  "properties": {
+    "modelId": {
+      "type": "string",
+      "description": "Unique identifier for the model."
+    },
+    "modelType": {
+      "type": "string",
+      "enum": [
+        "ONLINE_FRAUD_INSIGHTS",
+        "TRANSACTION_FRAUD_INSIGHTS",
+        "ACCOUNT_TAKEOVER_INSIGHTS"
+      ],
+      "description": "The type of fraud detection model."
+    },
+    "description": {
+      "type": "string"
+    },
+    "eventTypeName": {
+      "type": "string",
+      "description": "The event type used to train and score."
+    },
+    "arn": {
+      "type": "string"
+    },
+    "lastUpdatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "modelId",
+    "modelType",
+    "eventTypeName"
+  ]
+}

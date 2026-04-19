@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "fd": "https://aws.amazon.com/fraud-detector/vocabulary/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Detector": "fd:Detector",
+    "Model": "fd:Model",
+    "Rule": "fd:Rule",
+    "EventType": "fd:EventType",
+    "Tag": "schema:PropertyValue",
+    "detectorId": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "modelId": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "modelType": {
+      "@id": "fd:modelType",
+      "@type": "xsd:string"
+    },
+    "ruleId": {
+      "@id": "schema:identifier",
+      "@type": "xsd:string"
+    },
+    "expression": {
+      "@id": "fd:expression",
+      "@type": "xsd:string"
+    },
+    "outcomes": {
+      "@id": "fd:outcomes"
+    },
+    "eventTypeName": {
+      "@id": "fd:eventTypeName",
+      "@type": "xsd:string"
+    },
+    "eventVariables": {
+      "@id": "fd:eventVariables"
+    },
+    "labels": {
+      "@id": "fd:labels"
+    },
+    "arn": {
+      "@id": "fd:arn",
+      "@type": "xsd:string"
+    },
+    "createdTime": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "lastUpdatedTime": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

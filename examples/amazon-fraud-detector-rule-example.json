@@ -1,0 +1,12 @@
+{
+  "ruleId": "high-risk-block",
+  "detectorId": "payment-fraud-detector",
+  "ruleVersion": "1",
+  "description": "Block transactions with model score > 900",
+  "language": "DETECTORPL",
+  "expression": "$ofi_model_insightscore > 900",
+  "outcomes": [
+    "block"
+  ],
+  "arn": "arn:aws:frauddetector:us-east-1:123456789012:rule/payment-fraud-detector/high-risk-block/1"
+}

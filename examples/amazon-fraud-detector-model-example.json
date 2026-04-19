@@ -1,0 +1,9 @@
+{
+  "modelId": "ofi-model-v2",
+  "modelType": "ONLINE_FRAUD_INSIGHTS",
+  "description": "Online fraud insights model v2 with 18-month training window",
+  "eventTypeName": "transaction",
+  "arn": "arn:aws:frauddetector:us-east-1:123456789012:model/ofi-model-v2",
+  "lastUpdatedTime": "2025-06-01T10:00:00Z",
+  "createdTime": "2025-03-01T09:00:00Z"
+}

@@ -1,0 +1,203 @@
+# Amazon Fraud Detector Spectral Rules
+extends: spectral:oas
+rules:
+  fraud-detector-info-contact:
+    description: API must include contact information
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy
+  fraud-detector-info-description:
+    description: API must have a description
+    severity: error
+    given: "$.info"
+    then:
+      field: description
+      function: truthy
+  fraud-detector-server-https:
+    description: Server URLs must use HTTPS
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  fraud-detector-operation-summary:
+    description: Operations must have a summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+  fraud-detector-operation-description:
+    description: Operations should have a description
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+  fraud-detector-operation-tags:
+    description: Operations must have at least one tag
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+  fraud-detector-operation-id:
+    description: Operations must have operationId
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+  fraud-detector-response-200:
+    description: POST operations should define 200 response
+    severity: warn
+    given: "$.paths[*][post]"
+    then:
+      field: responses.200
+      function: truthy
+  fraud-detector-response-400:
+    description: Operations should define 400 response
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: responses.400
+      function: truthy
+  fraud-detector-response-500:
+    description: Operations should define 500 response
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: responses.500
+      function: truthy
+  fraud-detector-schema-description:
+    description: Schema components should have descriptions
+    severity: warn
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+  fraud-detector-tags-title-case:
+    description: Operation tags should use Title Case
+    severity: warn
+    given: "$.paths[*][*].tags[*]"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"
+  fraud-detector-detector-event-type:
+    description: Detector schema must reference eventTypeName
+    severity: warn
+    given: "$.components.schemas.Detector.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: eventTypeName
+  fraud-detector-model-type-enum:
+    description: Model type should define allowed enum values
+    severity: warn
+    given: "$.components.schemas.Model.properties.modelType"
+    then:
+      field: enum
+      function: truthy
+  fraud-detector-rule-outcomes:
+    description: Rule schema must include outcomes
+    severity: warn
+    given: "$.components.schemas.Rule.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: outcomes
+  fraud-detector-prediction-entities:
+    description: Event prediction request must include entities
+    severity: warn
+    given: "$.components.schemas.GetEventPredictionRequest.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: entities
+  fraud-detector-parameter-description:
+    description: Parameters must have descriptions
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    then:
+      field: description
+      function: truthy
+  fraud-detector-path-param-required:
+    description: Path parameters must be required
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].parameters[?(@.in=='path')]"
+    then:
+      field: required
+      function: truthy
+  fraud-detector-schema-properties:
+    description: Object schemas should define properties
+    severity: warn
+    given: "$.components.schemas[?(@.type=='object')]"
+    then:
+      field: properties
+      function: truthy
+  fraud-detector-arn-fields:
+    description: ARN fields should be consistently named 'arn'
+    severity: info
+    given: "$.components.schemas[*].properties.arn"
+    then:
+      field: type
+      function: truthy
+  fraud-detector-event-type-labels:
+    description: Event type schema must include labels field
+    severity: warn
+    given: "$.components.schemas.EventType.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: labels
+  fraud-detector-rule-language-enum:
+    description: Rule language should define DETECTORPL enum
+    severity: info
+    given: "$.components.schemas.Rule.properties.language"
+    then:
+      field: enum
+      function: truthy
+  fraud-detector-request-body-json:
+    description: Request bodies should define application/json content
+    severity: warn
+    given: "$.paths[*][put,post].requestBody.content"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: ["application/json"]
+  fraud-detector-tag-key-required:
+    description: Tag schema must require key field
+    severity: warn
+    given: "$.components.schemas.Tag.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: key
+  fraud-detector-delete-not-found:
+    description: DELETE operations should define 404 response
+    severity: warn
+    given: "$.paths[*].delete.responses"
+    then:
+      field: "404"
+      function: truthy

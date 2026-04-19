@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/json-structure/amazon-fraud-detector-event-type-structure.json",
+  "name": "EventType",
+  "description": "A schema defining the structure and variables of events analyzed by Amazon Fraud Detector.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Name of the event type.",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "eventVariables",
+      "type": "array",
+      "description": "Variables included in each event of this type.",
+      "required": true
+    },
+    {
+      "name": "labels",
+      "type": "array",
+      "description": "Fraud/legit classification labels for this event type.",
+      "required": true
+    },
+    {
+      "name": "entityTypes",
+      "type": "array",
+      "description": "Entity types (e.g., customer, account) involved in this event.",
+      "required": true
+    },
+    {
+      "name": "eventIngestion",
+      "type": "string",
+      "description": "",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    {
+      "name": "arn",
+      "type": "string",
+      "description": ""
+    }
+  ]
+}
