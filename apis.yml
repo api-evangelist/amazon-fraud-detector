@@ -109,7 +109,7 @@ common:
   url: capabilities/amazon-fraud-detector-real-time-detection.yaml
 - type: Vocabulary
   url: vocabulary/amazon-fraud-detector-vocabulary.yaml
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/amazon-fraud-detector-context.jsonld
 - type: Features
   data:
