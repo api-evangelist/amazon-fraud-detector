@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Fraud Detector API — Rules
+  description: 'Amazon Fraud Detector API — Rules. 2 operations. Lead operation: Create Rule. Self-contained Naftiko capability
+    covering one Amazon Fraud Detector business surface.'
+  tags:
+  - Amazon Fraud Detector
+  - Rules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FRAUD_DETECTOR_API_KEY: AMAZON_FRAUD_DETECTOR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-fraud-detector-rules
+    baseUri: https://frauddetector.{region}.amazonaws.com
+    description: Amazon Fraud Detector API — Rules business capability. Self-contained, no shared references.
+    resources:
+    - name: rules
+      path: /rules
+      operations:
+      - name: createrule
+        method: PUT
+        description: Create Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getrules
+        method: POST
+        description: Get Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FRAUD_DETECTOR_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-fraud-detector-rules-rest
+    port: 8080
+    description: REST adapter for Amazon Fraud Detector API — Rules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/rules
+      name: rules
+      description: REST surface for rules.
+      operations:
+      - method: PUT
+        name: createrule
+        description: Create Rule
+        call: amazon-fraud-detector-rules.createrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: getrules
+        description: Get Rules
+        call: amazon-fraud-detector-rules.getrules
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-fraud-detector-rules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Fraud Detector API — Rules. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-rule
+      description: Create Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: amazon-fraud-detector-rules.createrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rules
+      description: Get Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-fraud-detector-rules.getrules
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

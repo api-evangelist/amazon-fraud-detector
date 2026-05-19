@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Fraud Detector API — Detectors
+  description: 'Amazon Fraud Detector API — Detectors. 3 operations. Lead operation: Put Detector. Self-contained Naftiko
+    capability covering one Amazon Fraud Detector business surface.'
+  tags:
+  - Amazon Fraud Detector
+  - Detectors
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_FRAUD_DETECTOR_API_KEY: AMAZON_FRAUD_DETECTOR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-fraud-detector-detectors
+    baseUri: https://frauddetector.{region}.amazonaws.com
+    description: Amazon Fraud Detector API — Detectors business capability. Self-contained, no shared references.
+    resources:
+    - name: detectors
+      path: /detectors
+      operations:
+      - name: putdetector
+        method: PUT
+        description: Put Detector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getdetectors
+        method: POST
+        description: Get Detectors
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: detectors-detectorId
+      path: /detectors/{detectorId}
+      operations:
+      - name: deletedetector
+        method: DELETE
+        description: Delete Detector
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: detectorId
+          in: path
+          type: string
+          description: The ID of the detector to delete.
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_FRAUD_DETECTOR_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-fraud-detector-detectors-rest
+    port: 8080
+    description: REST adapter for Amazon Fraud Detector API — Detectors. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/detectors
+      name: detectors
+      description: REST surface for detectors.
+      operations:
+      - method: PUT
+        name: putdetector
+        description: Put Detector
+        call: amazon-fraud-detector-detectors.putdetector
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: getdetectors
+        description: Get Detectors
+        call: amazon-fraud-detector-detectors.getdetectors
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/detectors/{detectorid}
+      name: detectors-detectorid
+      description: REST surface for detectors-detectorId.
+      operations:
+      - method: DELETE
+        name: deletedetector
+        description: Delete Detector
+        call: amazon-fraud-detector-detectors.deletedetector
+        with:
+          detectorId: rest.detectorId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-fraud-detector-detectors-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Fraud Detector API — Detectors. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: put-detector
+      description: Put Detector
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: amazon-fraud-detector-detectors.putdetector
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-detectors
+      description: Get Detectors
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-fraud-detector-detectors.getdetectors
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-detector
+      description: Delete Detector
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-fraud-detector-detectors.deletedetector
+      with:
+        detectorId: tools.detectorId
+      outputParameters:
+      - type: object
+        mapping: $.

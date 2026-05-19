@@ -1,10 +1,8 @@
 aid: amazon-fraud-detector
 name: Amazon Fraud Detector
-description: >-
-  Amazon Fraud Detector is a fully managed service that uses machine learning
-  to identify potentially fraudulent activities and accurately distinguish
-  between legitimate and high-risk transactions. It uses your data and the
-  same technology that Amazon uses to protect its own business from fraud.
+description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent
+  activities and accurately distinguish between legitimate and high-risk transactions. It uses your data and the same technology
+  that Amazon uses to protect its own business from fraud.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -13,18 +11,15 @@ tags:
 - Fraud Detection
 - Machine Learning
 - Security
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/apis.yml
 created: '2026-03-16'
-modified: '2026-04-19'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
 - aid: amazon-fraud-detector:amazon-fraud-detector-api
   name: Amazon Fraud Detector API
-  description: >-
-    The Amazon Fraud Detector API provides programmatic access to create and
-    manage detectors, models, event types, entities, labels, outcomes, rules,
-    and variables for automated fraud detection workflows.
+  description: The Amazon Fraud Detector API provides programmatic access to create and manage detectors, models, event types,
+    entities, labels, outcomes, rules, and variables for automated fraud detection workflows.
   humanURL: https://aws.amazon.com/fraud-detector/
   baseURL: https://frauddetector.amazonaws.com
   tags:
@@ -74,6 +69,20 @@ apis:
     url: https://aws.amazon.com/fraud-detector/faqs/
   - type: APIReference
     url: https://docs.aws.amazon.com/frauddetector/latest/api/Welcome.html
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-detectors.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-event-types.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-labels.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-models.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-predictions.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-rules.yaml
+  - type: NaftikoCapability
+    url: capabilities/amazon-fraud-detector-tags.yaml
 common:
 - type: Portal
   url: https://aws.amazon.com/fraud-detector/
@@ -103,10 +112,6 @@ common:
   url: https://stackoverflow.com/questions/tagged/amazon-fraud-detector
 - type: SpectralRules
   url: rules/amazon-fraud-detector-spectral-rules.yml
-- type: NaftikoCapability
-  url: capabilities/shared/fraud-detector.yaml
-- type: NaftikoCapability
-  url: capabilities/amazon-fraud-detector-real-time-detection.yaml
 - type: Vocabulary
   url: vocabulary/amazon-fraud-detector-vocabulary.yaml
 - type: JSONLD
@@ -118,7 +123,8 @@ common:
   - name: Real-Time Fraud Scoring
     description: Returns fraud scores within milliseconds for integration into transaction approval flows.
   - name: Pre-Built Models
-    description: Online Fraud Insights (OFI), Transaction Fraud Insights (TFI), and Account Takeover Insights (ATI) pre-trained model types.
+    description: Online Fraud Insights (OFI), Transaction Fraud Insights (TFI), and Account Takeover Insights (ATI) pre-trained
+      model types.
   - name: Rule Engine
     description: DETECTORPL rule language allows writing conditional logic using model scores and event variables.
   - name: Model Explainability
@@ -160,15 +166,15 @@ common:
 - type: Integrations
   url: https://aws.amazon.com/marketplace
 integrations:
-  - name: Sign in
-  - name: Agent Mode
-  - name: 'Why AWS Marketplace?'
-  - name: Get started in AWS Marketplace
-  - name: Industry
-  - name: Resources
-  - name: Become a Channel Partner
-  - name: Sell in AWS Marketplace
-  - name: Manage Your Account
+- name: Sign in
+- name: Agent Mode
+- name: Why AWS Marketplace?
+- name: Get started in AWS Marketplace
+- name: Industry
+- name: Resources
+- name: Become a Channel Partner
+- name: Sell in AWS Marketplace
+- name: Manage Your Account
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
