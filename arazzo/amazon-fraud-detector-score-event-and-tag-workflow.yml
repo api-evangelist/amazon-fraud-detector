@@ -1,0 +1,144 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Score Event and Tag
+  summary: Score an event against a detector and branch on the returned model score to tag the detector accordingly.
+  description: >-
+    Turns a real time fraud prediction into a follow up action. The workflow
+    submits an event to a detector for scoring, then branches on the returned
+    model score: a high score routes to tagging the detector as having flagged a
+    high-risk event, while a low score routes to tagging it as having seen a
+    low-risk event. Each step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: score-event-and-tag
+  summary: Score an event and tag the detector based on whether the score crosses a threshold.
+  description: >-
+    Submits an event for prediction, then branches on the model score to tag the
+    detector resource as having flagged a high-risk or low-risk event.
+  inputs:
+    type: object
+    required:
+    - eventId
+    - detectorId
+    - eventTypeName
+    - eventTimestamp
+    - entities
+    - eventValues
+    - detectorArn
+    properties:
+      eventId:
+        type: string
+        description: The unique ID of the event being scored.
+      detectorId:
+        type: string
+        description: The detector to score the event against.
+      detectorVersionId:
+        type: string
+        description: An optional detector version id to score against.
+      eventTypeName:
+        type: string
+        description: The event type of the event.
+      eventTimestamp:
+        type: string
+        description: The timestamp the event occurred (ISO 8601).
+      entities:
+        type: array
+        description: The entities associated with the event.
+        items:
+          type: object
+      eventValues:
+        type: object
+        description: The event variable name/value pairs to score.
+        additionalProperties:
+          type: string
+      detectorArn:
+        type: string
+        description: The ARN of the detector resource to tag with the result.
+  steps:
+  - stepId: scoreEvent
+    description: >-
+      Submit the event to the detector for prediction and capture the model
+      score from the first model result.
+    operationId: getEventPrediction
+    parameters:
+    - name: eventId
+      in: path
+      value: $inputs.eventId
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+        detectorVersionId: $inputs.detectorVersionId
+        eventId: $inputs.eventId
+        eventTypeName: $inputs.eventTypeName
+        eventTimestamp: $inputs.eventTimestamp
+        entities: $inputs.entities
+        eventVariables: $inputs.eventValues
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelScore: $response.body#/modelScores/0/scores/model_score
+      ruleResults: $response.body#/ruleResults
+    onSuccess:
+    - name: highRisk
+      type: goto
+      stepId: tagHighRisk
+      criteria:
+      - context: $response.body
+        condition: $.modelScores[0].scores.model_score >= 900
+        type: jsonpath
+    - name: lowRisk
+      type: goto
+      stepId: tagLowRisk
+      criteria:
+      - context: $response.body
+        condition: $.modelScores[0].scores.model_score < 900
+        type: jsonpath
+  - stepId: tagHighRisk
+    description: >-
+      Tag the detector resource to record that it flagged a high-risk event.
+    operationId: tagResource
+    parameters:
+    - name: resourceARN
+      in: path
+      value: $inputs.detectorArn
+    requestBody:
+      contentType: application/json
+      payload:
+        tags:
+        - key: LastPredictionRisk
+          value: HIGH
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $inputs.detectorArn
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: tagLowRisk
+    description: >-
+      Tag the detector resource to record that it saw a low-risk event.
+    operationId: tagResource
+    parameters:
+    - name: resourceARN
+      in: path
+      value: $inputs.detectorArn
+    requestBody:
+      contentType: application/json
+      payload:
+        tags:
+        - key: LastPredictionRisk
+          value: LOW
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $inputs.detectorArn
+  outputs:
+    modelScore: $steps.scoreEvent.outputs.modelScore
+    highRiskTaggedArn: $steps.tagHighRisk.outputs.taggedArn
+    lowRiskTaggedArn: $steps.tagLowRisk.outputs.taggedArn

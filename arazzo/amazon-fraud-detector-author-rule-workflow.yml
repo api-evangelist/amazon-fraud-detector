@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Author Rule
+  summary: Create a DETECTORPL rule for a detector and read the detector's rules back to confirm it.
+  description: >-
+    Encodes a piece of fraud business logic as a rule. The workflow creates a
+    rule on an existing detector using a DETECTORPL expression and one or more
+    outcomes, then lists the detector's rules to confirm the new rule was
+    registered. Each step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: author-rule
+  summary: Create a rule on a detector and verify it via the detector's rule list.
+  description: >-
+    Creates a DETECTORPL rule with an expression and outcomes on an existing
+    detector, then reads the detector's rules back to confirm registration.
+  inputs:
+    type: object
+    required:
+    - detectorId
+    - ruleId
+    - expression
+    - language
+    - outcomes
+    properties:
+      detectorId:
+        type: string
+        description: The detector the rule belongs to (e.g. "payment-fraud-detector").
+      ruleId:
+        type: string
+        description: The identifier for the rule to create (e.g. "high-risk-rule").
+      ruleDescription:
+        type: string
+        description: A human readable description of the rule.
+      expression:
+        type: string
+        description: The rule expression in the rule language (e.g. "$model_score > 900").
+      language:
+        type: string
+        description: The rule language, such as DETECTORPL.
+      outcomes:
+        type: array
+        description: The outcome names returned when the rule matches.
+        items:
+          type: string
+  steps:
+  - stepId: createRule
+    description: >-
+      Create the rule on the detector with its expression and outcomes.
+    operationId: createRule
+    requestBody:
+      contentType: application/json
+      payload:
+        ruleId: $inputs.ruleId
+        detectorId: $inputs.detectorId
+        description: $inputs.ruleDescription
+        expression: $inputs.expression
+        language: $inputs.language
+        outcomes: $inputs.outcomes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/rule/ruleId
+      ruleVersion: $response.body#/rule/ruleVersion
+      ruleArn: $response.body#/rule/arn
+  - stepId: confirmRule
+    description: >-
+      List the detector's rules, filtered to the new rule id, to confirm the
+      rule was registered.
+    operationId: getRules
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+        ruleId: $steps.createRule.outputs.ruleId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/ruleDetails/0/ruleId
+      ruleVersion: $response.body#/ruleDetails/0/ruleVersion
+  outputs:
+    ruleId: $steps.confirmRule.outputs.ruleId
+    ruleVersion: $steps.confirmRule.outputs.ruleVersion
+    ruleArn: $steps.createRule.outputs.ruleArn

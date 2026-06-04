@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Bootstrap Event Type
+  summary: Create fraud and legit labels, define an event type that uses them, then confirm the event type exists.
+  description: >-
+    Before any detector or model can be built in Amazon Fraud Detector, the
+    underlying event schema must exist. This workflow lays that foundation by
+    creating the two classification labels (a fraud label and a legitimate
+    label), defining an event type that references those labels along with its
+    event variables and entity types, and finally reading the event type back to
+    confirm it was registered. Each step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bootstrap-event-type
+  summary: Stand up the labels and event type schema that detectors and models depend on.
+  description: >-
+    Creates a fraud label and a legitimate label, defines an event type that
+    references those labels, its event variables, and its entity types, and then
+    reads the event type back to verify registration.
+  inputs:
+    type: object
+    required:
+    - eventTypeName
+    - fraudLabel
+    - legitLabel
+    - eventVariables
+    - entityTypes
+    properties:
+      eventTypeName:
+        type: string
+        description: The name of the event type to create (e.g. "transaction").
+      eventTypeDescription:
+        type: string
+        description: A human readable description of the event type.
+      fraudLabel:
+        type: string
+        description: The name of the label that marks an event as fraudulent (e.g. "fraud").
+      legitLabel:
+        type: string
+        description: The name of the label that marks an event as legitimate (e.g. "legit").
+      eventVariables:
+        type: array
+        description: The list of event variable names that make up the event schema.
+        items:
+          type: string
+      entityTypes:
+        type: array
+        description: The list of entity type names associated with the event type.
+        items:
+          type: string
+  steps:
+  - stepId: createFraudLabel
+    description: >-
+      Create the label used to classify an event as fraudulent so the event
+      type can reference it.
+    operationId: putLabel
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.fraudLabel
+        description: Marks an event as fraudulent.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      fraudLabelName: $inputs.fraudLabel
+  - stepId: createLegitLabel
+    description: >-
+      Create the label used to classify an event as legitimate so the event
+      type can reference it.
+    operationId: putLabel
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.legitLabel
+        description: Marks an event as legitimate.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      legitLabelName: $inputs.legitLabel
+  - stepId: defineEventType
+    description: >-
+      Create the event type, referencing the two labels just created along with
+      its event variables and entity types.
+    operationId: putEventType
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.eventTypeName
+        description: $inputs.eventTypeDescription
+        eventVariables: $inputs.eventVariables
+        labels:
+        - $steps.createFraudLabel.outputs.fraudLabelName
+        - $steps.createLegitLabel.outputs.legitLabelName
+        entityTypes: $inputs.entityTypes
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: confirmEventType
+    description: >-
+      Read the event type back by name to confirm it was registered with the
+      expected schema.
+    operationId: getEventTypes
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventTypeName: $response.body#/eventTypes/0/name
+      eventTypeLabels: $response.body#/eventTypes/0/labels
+  outputs:
+    eventTypeName: $steps.confirmEventType.outputs.eventTypeName
+    eventTypeLabels: $steps.confirmEventType.outputs.eventTypeLabels

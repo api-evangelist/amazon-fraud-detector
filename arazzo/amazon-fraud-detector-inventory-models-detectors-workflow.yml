@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Inventory Models and Detectors
+  summary: List models for an event type, then list detectors and tag a chosen detector with its model count.
+  description: >-
+    Produces a quick inventory of the fraud assets tied to an event type. The
+    workflow lists the models, lists the detectors, and then tags a chosen
+    detector resource with a marker recording that an inventory pass ran. Each
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inventory-models-detectors
+  summary: List models and detectors, then mark a detector as inventoried.
+  description: >-
+    Lists models and detectors to build an inventory, then tags a chosen
+    detector resource to record that the inventory pass completed.
+  inputs:
+    type: object
+    required:
+    - detectorArn
+    properties:
+      modelType:
+        type: string
+        description: An optional model type to filter the model listing by.
+      detectorArn:
+        type: string
+        description: The ARN of the detector resource to mark as inventoried.
+  steps:
+  - stepId: listModels
+    description: >-
+      List the models, optionally filtered by model type, to build the model
+      side of the inventory.
+    operationId: getModels
+    requestBody:
+      contentType: application/json
+      payload:
+        modelType: $inputs.modelType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      models: $response.body#/models
+  - stepId: listDetectors
+    description: >-
+      List the detectors to build the detector side of the inventory.
+    operationId: getDetectors
+    requestBody:
+      contentType: application/json
+      payload: {}
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detectors: $response.body#/detectors
+      firstDetectorId: $response.body#/detectors/0/detectorId
+  - stepId: markInventoried
+    description: >-
+      Tag the chosen detector resource to record that an inventory pass ran.
+    operationId: tagResource
+    parameters:
+    - name: resourceARN
+      in: path
+      value: $inputs.detectorArn
+    requestBody:
+      contentType: application/json
+      payload:
+        tags:
+        - key: InventoryPass
+          value: completed
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $inputs.detectorArn
+  outputs:
+    models: $steps.listModels.outputs.models
+    detectors: $steps.listDetectors.outputs.detectors
+    taggedArn: $steps.markInventoried.outputs.taggedArn

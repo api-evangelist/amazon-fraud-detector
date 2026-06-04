@@ -1,0 +1,76 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Tag and Audit Resource
+  summary: Assign tags to a Fraud Detector resource and read its tags back to confirm they were applied.
+  description: >-
+    Applies governance metadata to a Fraud Detector resource and verifies it.
+    The workflow assigns a set of tags to a resource identified by ARN, then
+    lists the tags on that resource to confirm the assignment took effect. Each
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: tag-and-audit-resource
+  summary: Tag a resource and read the tags back to confirm the assignment.
+  description: >-
+    Assigns the supplied tags to a resource by ARN, then lists the resource's
+    tags to confirm they were applied.
+  inputs:
+    type: object
+    required:
+    - resourceARN
+    - tags
+    properties:
+      resourceARN:
+        type: string
+        description: The ARN of the resource to tag (detector, model, rule, etc.).
+      tags:
+        type: array
+        description: The list of key/value tag pairs to assign to the resource.
+        items:
+          type: object
+          required:
+          - key
+          - value
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+  steps:
+  - stepId: applyTags
+    description: >-
+      Assign the supplied tags to the resource identified by ARN.
+    operationId: tagResource
+    parameters:
+    - name: resourceARN
+      in: path
+      value: $inputs.resourceARN
+    requestBody:
+      contentType: application/json
+      payload:
+        tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      taggedArn: $inputs.resourceARN
+  - stepId: auditTags
+    description: >-
+      List the resource's tags to confirm the assignment took effect.
+    operationId: listTagsForResource
+    parameters:
+    - name: resourceARN
+      in: path
+      value: $steps.applyTags.outputs.taggedArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tags: $response.body#/tags
+      firstTagKey: $response.body#/tags/0/key
+  outputs:
+    taggedArn: $steps.applyTags.outputs.taggedArn
+    tags: $steps.auditTags.outputs.tags

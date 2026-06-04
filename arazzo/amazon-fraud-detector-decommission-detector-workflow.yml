@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Decommission Detector
+  summary: Inspect a detector's rules and then delete the detector, branching when rules still block deletion.
+  description: >-
+    Safely retires a detector. A detector cannot be deleted while it still has
+    detector versions and rule versions, so this workflow first lists the
+    detector's rules and branches: when no rules remain it proceeds to delete
+    the detector, and when rules are still present it routes to a cleanup-needed
+    step that surfaces the blocking rules instead. Each step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-detector
+  summary: Check a detector's rules, then delete it only when no rules block deletion.
+  description: >-
+    Lists the detector's rules and branches on whether any remain. With no rules
+    the detector is deleted; with rules present the flow surfaces the blocking
+    rules instead of deleting.
+  inputs:
+    type: object
+    required:
+    - detectorId
+    properties:
+      detectorId:
+        type: string
+        description: The detector to inspect and decommission.
+  steps:
+  - stepId: listDetectorRules
+    description: >-
+      List the detector's rules to determine whether anything still blocks
+      deletion.
+    operationId: getRules
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleDetails: $response.body#/ruleDetails
+    onSuccess:
+    - name: noBlockingRules
+      type: goto
+      stepId: deleteDetector
+      criteria:
+      - context: $response.body
+        condition: $.ruleDetails.length == 0
+        type: jsonpath
+    - name: rulesPresent
+      type: goto
+      stepId: reportBlockingRules
+      criteria:
+      - context: $response.body
+        condition: $.ruleDetails.length > 0
+        type: jsonpath
+  - stepId: deleteDetector
+    description: >-
+      Delete the detector now that no rules block the operation.
+    operationId: deleteDetector
+    parameters:
+    - name: detectorId
+      in: path
+      value: $inputs.detectorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedDetectorId: $inputs.detectorId
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: reportBlockingRules
+    description: >-
+      Re-read the detector's rules to surface the rules that still block
+      deletion so they can be cleaned up before retrying.
+    operationId: getRules
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      blockingRules: $response.body#/ruleDetails
+  outputs:
+    deletedDetectorId: $steps.deleteDetector.outputs.deletedDetectorId
+    blockingRules: $steps.reportBlockingRules.outputs.blockingRules

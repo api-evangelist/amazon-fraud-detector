@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Provision Model and Detector
+  summary: Define an event type, create an ML model and a detector on top of it, then confirm the detector exists.
+  description: >-
+    Builds the core fraud detection assets in order: it defines (or updates) the
+    event type that scopes the schema, creates a machine learning model bound to
+    that event type, creates a detector that orchestrates models and rules for
+    the same event type, and finally reads the detector back to confirm it was
+    created. Each step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-model-detector
+  summary: Provision an event type, an ML model, and a detector in one pass.
+  description: >-
+    Defines the event type, creates an ML model and a detector that both
+    reference it, then reads the detector back to verify it exists.
+  inputs:
+    type: object
+    required:
+    - eventTypeName
+    - eventVariables
+    - labels
+    - entityTypes
+    - modelId
+    - modelType
+    - detectorId
+    properties:
+      eventTypeName:
+        type: string
+        description: The event type that the model and detector both operate on.
+      eventVariables:
+        type: array
+        description: The event variable names that make up the event schema.
+        items:
+          type: string
+      labels:
+        type: array
+        description: The label names available for this event type.
+        items:
+          type: string
+      entityTypes:
+        type: array
+        description: The entity type names associated with the event type.
+        items:
+          type: string
+      modelId:
+        type: string
+        description: The identifier for the ML model to create (e.g. "fraud-model-v1").
+      modelType:
+        type: string
+        description: The model type, such as ONLINE_FRAUD_INSIGHTS.
+      modelDescription:
+        type: string
+        description: A human readable description of the model.
+      detectorId:
+        type: string
+        description: The identifier for the detector to create (e.g. "payment-fraud-detector").
+      detectorDescription:
+        type: string
+        description: A human readable description of the detector.
+  steps:
+  - stepId: defineEventType
+    description: >-
+      Create or update the event type so the model and detector have a schema to
+      bind to.
+    operationId: putEventType
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.eventTypeName
+        eventVariables: $inputs.eventVariables
+        labels: $inputs.labels
+        entityTypes: $inputs.entityTypes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventTypeName: $inputs.eventTypeName
+  - stepId: createModel
+    description: >-
+      Create the ML model bound to the event type defined in the previous step.
+    operationId: putModel
+    requestBody:
+      contentType: application/json
+      payload:
+        modelId: $inputs.modelId
+        modelType: $inputs.modelType
+        description: $inputs.modelDescription
+        eventTypeName: $steps.defineEventType.outputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelId: $inputs.modelId
+  - stepId: createDetector
+    description: >-
+      Create the detector that orchestrates models and rules for the same event
+      type.
+    operationId: putDetector
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+        description: $inputs.detectorDescription
+        eventTypeName: $steps.defineEventType.outputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detectorId: $inputs.detectorId
+  - stepId: confirmDetector
+    description: >-
+      Read the detector back by id to confirm it was created against the
+      expected event type.
+    operationId: getDetectors
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detectorId: $response.body#/detectors/0/detectorId
+      detectorArn: $response.body#/detectors/0/arn
+  outputs:
+    modelId: $steps.createModel.outputs.modelId
+    detectorId: $steps.confirmDetector.outputs.detectorId
+    detectorArn: $steps.confirmDetector.outputs.detectorArn

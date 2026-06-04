@@ -1,0 +1,172 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Fraud Detector Detector Pipeline
+  summary: Define an event type, create a detector and a rule, then score a sample event against the detector.
+  description: >-
+    Walks the full path from schema to a live fraud decision. The workflow
+    defines the event type, creates a detector for it, authors a DETECTORPL rule
+    with outcomes, and then submits a sample event to the detector for scoring,
+    returning the model scores and rule results. Each step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: fraudDetectorApi
+  url: ../openapi/amazon-fraud-detector-openapi.yml
+  type: openapi
+workflows:
+- workflowId: detector-pipeline
+  summary: Stand up an event type, detector, and rule, then score a sample event.
+  description: >-
+    Defines the event type, creates a detector and a rule on it, and submits a
+    sample event for prediction to verify the pipeline returns scores and rule
+    results.
+  inputs:
+    type: object
+    required:
+    - eventTypeName
+    - eventVariables
+    - labels
+    - entityTypes
+    - detectorId
+    - ruleId
+    - expression
+    - language
+    - outcomes
+    - eventId
+    - eventTimestamp
+    - entities
+    - eventValues
+    properties:
+      eventTypeName:
+        type: string
+        description: The event type the detector and event share.
+      eventVariables:
+        type: array
+        description: The event variable names that make up the event schema.
+        items:
+          type: string
+      labels:
+        type: array
+        description: The label names available for this event type.
+        items:
+          type: string
+      entityTypes:
+        type: array
+        description: The entity type names associated with the event type.
+        items:
+          type: string
+      detectorId:
+        type: string
+        description: The detector identifier to create and score against.
+      detectorDescription:
+        type: string
+        description: A human readable description of the detector.
+      ruleId:
+        type: string
+        description: The identifier for the rule to create on the detector.
+      ruleDescription:
+        type: string
+        description: A human readable description of the rule.
+      expression:
+        type: string
+        description: The rule expression (e.g. "$model_score > 900").
+      language:
+        type: string
+        description: The rule language, such as DETECTORPL.
+      outcomes:
+        type: array
+        description: The outcome names returned when the rule matches.
+        items:
+          type: string
+      eventId:
+        type: string
+        description: The unique ID of the event being scored.
+      eventTimestamp:
+        type: string
+        description: The timestamp the event occurred (ISO 8601).
+      entities:
+        type: array
+        description: The entities associated with the event.
+        items:
+          type: object
+      eventValues:
+        type: object
+        description: The event variable name/value pairs to score.
+        additionalProperties:
+          type: string
+  steps:
+  - stepId: defineEventType
+    description: >-
+      Create or update the event type so the detector and event share a schema.
+    operationId: putEventType
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.eventTypeName
+        eventVariables: $inputs.eventVariables
+        labels: $inputs.labels
+        entityTypes: $inputs.entityTypes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventTypeName: $inputs.eventTypeName
+  - stepId: createDetector
+    description: >-
+      Create the detector that will orchestrate rules for the event type.
+    operationId: putDetector
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $inputs.detectorId
+        description: $inputs.detectorDescription
+        eventTypeName: $steps.defineEventType.outputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      detectorId: $inputs.detectorId
+  - stepId: createRule
+    description: >-
+      Author a DETECTORPL rule on the detector with its expression and outcomes.
+    operationId: createRule
+    requestBody:
+      contentType: application/json
+      payload:
+        ruleId: $inputs.ruleId
+        detectorId: $steps.createDetector.outputs.detectorId
+        description: $inputs.ruleDescription
+        expression: $inputs.expression
+        language: $inputs.language
+        outcomes: $inputs.outcomes
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ruleId: $response.body#/rule/ruleId
+  - stepId: scoreEvent
+    description: >-
+      Submit a sample event to the detector for prediction and return the model
+      scores and rule results.
+    operationId: getEventPrediction
+    parameters:
+    - name: eventId
+      in: path
+      value: $inputs.eventId
+    requestBody:
+      contentType: application/json
+      payload:
+        detectorId: $steps.createDetector.outputs.detectorId
+        eventId: $inputs.eventId
+        eventTypeName: $steps.defineEventType.outputs.eventTypeName
+        eventTimestamp: $inputs.eventTimestamp
+        entities: $inputs.entities
+        eventVariables: $inputs.eventValues
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      modelScores: $response.body#/modelScores
+      ruleResults: $response.body#/ruleResults
+  outputs:
+    detectorId: $steps.createDetector.outputs.detectorId
+    ruleId: $steps.createRule.outputs.ruleId
+    modelScores: $steps.scoreEvent.outputs.modelScores
+    ruleResults: $steps.scoreEvent.outputs.ruleResults
