@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Fraud Detector API",
+    "version": "2019-11-15"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Detectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Detectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/detectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all detectors or a single detector if a detectorId is specified."
+        },
+        {
+          "info": {
+            "name": "Put Detector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/detectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a detector."
+        },
+        {
+          "info": {
+            "name": "Delete Detector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://frauddetector.{region}.amazonaws.com/detectors/:detectorId",
+            "params": [
+              {
+                "name": "detectorId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the detector to delete."
+              }
+            ]
+          },
+          "docs": "Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets one or more models."
+        },
+        {
+          "info": {
+            "name": "Put Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a model."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all rules for a detector."
+        },
+        {
+          "info": {
+            "name": "Create Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a rule for use with the specified detector."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Predictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Event Prediction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/predictions/event/:eventId",
+            "params": [
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates an event against a detector version and returns prediction outcomes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Event Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/event-types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets all event types or a specific event type if a name is provided."
+        },
+        {
+          "info": {
+            "name": "Put Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/event-types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates an event type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Put Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/labels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates label. A label classifies an event as fraudulent or legitimate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tags For Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://frauddetector.{region}.amazonaws.com/tags/:resourceARN",
+            "params": [
+              {
+                "name": "resourceARN",
+                "value": "",
+                "type": "path",
+                "description": "The ARN of the resource."
+              }
+            ]
+          },
+          "docs": "Lists all tags associated with the resource."
+        },
+        {
+          "info": {
+            "name": "Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/tags/:resourceARN",
+            "params": [
+              {
+                "name": "resourceARN",
+                "value": "",
+                "type": "path",
+                "description": "The ARN of the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns tags to a resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
