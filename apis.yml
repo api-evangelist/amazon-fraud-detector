@@ -5,7 +5,7 @@ description: >-
   activities and accurately distinguish between legitimate and high-risk transactions. It uses your data and the same
   technology that Amazon uses to protect its own business from fraud.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AWS
   - Financial Services
