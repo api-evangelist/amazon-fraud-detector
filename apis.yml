@@ -53,15 +53,15 @@ apis:
         url: json-structure/amazon-fraud-detector-event-type-structure.json
       - type: JSONStructure
         url: json-structure/amazon-fraud-detector-tag-structure.json
-      - type: Example
+      - type: Examples
         url: examples/amazon-fraud-detector-detector-example.json
-      - type: Example
+      - type: Examples
         url: examples/amazon-fraud-detector-model-example.json
-      - type: Example
+      - type: Examples
         url: examples/amazon-fraud-detector-rule-example.json
-      - type: Example
+      - type: Examples
         url: examples/amazon-fraud-detector-event-type-example.json
-      - type: Example
+      - type: Examples
         url: examples/amazon-fraud-detector-tag-example.json
       - type: GettingStarted
         url: https://aws.amazon.com/fraud-detector/getting-started/
@@ -74,33 +74,30 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-fraud-detector/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/amazon-fraud-detector-author-rule-workflow.yml
-        name: Amazon Fraud Detector Author Rule
-        summary: Create a DETECTORPL rule for a detector and read the detector's rules back to confirm it.
-      - url: arazzo/amazon-fraud-detector-bootstrap-event-type-workflow.yml
-        name: Amazon Fraud Detector Bootstrap Event Type
-        summary: Create fraud and legit labels, define an event type that uses them, then confirm the event type exists.
-      - url: arazzo/amazon-fraud-detector-decommission-detector-workflow.yml
-        name: Amazon Fraud Detector Decommission Detector
-        summary: Inspect a detector's rules and then delete the detector, branching when rules still block deletion.
-      - url: arazzo/amazon-fraud-detector-detector-pipeline-workflow.yml
-        name: Amazon Fraud Detector Detector Pipeline
-        summary: Define an event type, create a detector and a rule, then score a sample event against the detector.
-      - url: arazzo/amazon-fraud-detector-inventory-models-detectors-workflow.yml
-        name: Amazon Fraud Detector Inventory Models and Detectors
-        summary: List models for an event type, then list detectors and tag a chosen detector with its model count.
-      - url: arazzo/amazon-fraud-detector-provision-model-detector-workflow.yml
-        name: Amazon Fraud Detector Provision Model and Detector
-        summary: Define an event type, create an ML model and a detector on top of it, then confirm the detector exists.
-      - url: arazzo/amazon-fraud-detector-score-event-and-tag-workflow.yml
-        name: Amazon Fraud Detector Score Event and Tag
-        summary: Score an event against a detector and branch on the returned model score to tag the detector accordingly.
-      - url: arazzo/amazon-fraud-detector-tag-and-audit-resource-workflow.yml
-        name: Amazon Fraud Detector Tag and Audit Resource
-        summary: Assign tags to a Fraud Detector resource and read its tags back to confirm they were applied.
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-author-rule-workflow.yml
+    name: Amazon Fraud Detector Author Rule
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-bootstrap-event-type-workflow.yml
+    name: Amazon Fraud Detector Bootstrap Event Type
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-decommission-detector-workflow.yml
+    name: Amazon Fraud Detector Decommission Detector
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-detector-pipeline-workflow.yml
+    name: Amazon Fraud Detector Detector Pipeline
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-inventory-models-detectors-workflow.yml
+    name: Amazon Fraud Detector Inventory Models and Detectors
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-provision-model-detector-workflow.yml
+    name: Amazon Fraud Detector Provision Model and Detector
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-score-event-and-tag-workflow.yml
+    name: Amazon Fraud Detector Score Event and Tag
+  - type: Arazzo
+    url: arazzo/amazon-fraud-detector-tag-and-audit-resource-workflow.yml
+    name: Amazon Fraud Detector Tag and Audit Resource
   - type: Portal
     url: https://aws.amazon.com/fraud-detector/
   - type: Website
@@ -119,7 +116,7 @@ common:
     url: https://github.com/aws
   - type: Console
     url: https://console.aws.amazon.com/frauddetector/
-  - type: SignUp
+  - type: Signup
     url: https://portal.aws.amazon.com/billing/signup
   - type: StatusPage
     url: https://health.aws.amazon.com/health/status
