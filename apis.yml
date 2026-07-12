@@ -72,6 +72,14 @@ apis:
       - type: APIReference
         url: https://docs.aws.amazon.com/frauddetector/latest/api/Welcome.html
 common:
+  - type: TrustCenter
+    url: security/amazon-fraud-detector-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-fraud-detector-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-fraud-detector-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-fraud-detector-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-fraud-detector/overview
   - type: Arazzo
