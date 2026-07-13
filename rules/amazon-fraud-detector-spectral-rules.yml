@@ -1,96 +1,114 @@
-# Amazon Fraud Detector Spectral Rules
-extends: spectral:oas
+# amazon-fraud-detector — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on amazonaws.com
+#   - path-params-casing: camel @ 100% (n=4)
+#   - operationid-casing: camel @ 100% (n=13)
+#   - schema-names-casing: pascal @ 100% (n=13)
+#   - schema-properties-casing: camel @ 53% (n=77)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-400: 100% adherence
+#   - operation-documents-500: 100% adherence
+#   - merge: kept 25 existing, added 10 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, security-schemes-defined, error-schema-defined, operation-documents-400, operation-documents-500, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   fraud-detector-info-contact:
     description: API must include contact information
     severity: warn
-    given: "$.info"
+    given: $.info
     then:
       field: contact
       function: truthy
   fraud-detector-info-description:
     description: API must have a description
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: description
       function: truthy
   fraud-detector-server-https:
     description: Server URLs must use HTTPS
     severity: error
-    given: "$.servers[*].url"
+    given: $.servers[*].url
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
+        match: ^https://
   fraud-detector-operation-summary:
     description: Operations must have a summary
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: summary
       function: truthy
   fraud-detector-operation-description:
     description: Operations should have a description
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: description
       function: truthy
   fraud-detector-operation-tags:
     description: Operations must have at least one tag
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
   fraud-detector-operation-id:
     description: Operations must have operationId
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: operationId
       function: truthy
   fraud-detector-response-200:
     description: POST operations should define 200 response
     severity: warn
-    given: "$.paths[*][post]"
+    given: $.paths[*][post]
     then:
       field: responses.200
       function: truthy
   fraud-detector-response-400:
     description: Operations should define 400 response
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: responses.400
       function: truthy
   fraud-detector-response-500:
     description: Operations should define 500 response
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: responses.500
       function: truthy
   fraud-detector-schema-description:
     description: Schema components should have descriptions
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: description
       function: truthy
   fraud-detector-tags-title-case:
     description: Operation tags should use Title Case
     severity: warn
-    given: "$.paths[*][*].tags[*]"
+    given: $.paths[*][*].tags[*]
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z0-9 ]*$"
+        match: ^[A-Z][a-zA-Z0-9 ]*$
   fraud-detector-detector-event-type:
     description: Detector schema must reference eventTypeName
     severity: warn
-    given: "$.components.schemas.Detector.required"
+    given: $.components.schemas.Detector.required
     then:
       function: schema
       functionOptions:
@@ -101,14 +119,14 @@ rules:
   fraud-detector-model-type-enum:
     description: Model type should define allowed enum values
     severity: warn
-    given: "$.components.schemas.Model.properties.modelType"
+    given: $.components.schemas.Model.properties.modelType
     then:
       field: enum
       function: truthy
   fraud-detector-rule-outcomes:
     description: Rule schema must include outcomes
     severity: warn
-    given: "$.components.schemas.Rule.required"
+    given: $.components.schemas.Rule.required
     then:
       function: schema
       functionOptions:
@@ -119,7 +137,7 @@ rules:
   fraud-detector-prediction-entities:
     description: Event prediction request must include entities
     severity: warn
-    given: "$.components.schemas.GetEventPredictionRequest.required"
+    given: $.components.schemas.GetEventPredictionRequest.required
     then:
       function: schema
       functionOptions:
@@ -130,35 +148,35 @@ rules:
   fraud-detector-parameter-description:
     description: Parameters must have descriptions
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete].parameters[*]"
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
     then:
       field: description
       function: truthy
   fraud-detector-path-param-required:
     description: Path parameters must be required
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete].parameters[?(@.in=='path')]"
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='path')]
     then:
       field: required
       function: truthy
   fraud-detector-schema-properties:
     description: Object schemas should define properties
     severity: warn
-    given: "$.components.schemas[?(@.type=='object')]"
+    given: $.components.schemas[?(@.type=='object')]
     then:
       field: properties
       function: truthy
   fraud-detector-arn-fields:
     description: ARN fields should be consistently named 'arn'
     severity: info
-    given: "$.components.schemas[*].properties.arn"
+    given: $.components.schemas[*].properties.arn
     then:
       field: type
       function: truthy
   fraud-detector-event-type-labels:
     description: Event type schema must include labels field
     severity: warn
-    given: "$.components.schemas.EventType.required"
+    given: $.components.schemas.EventType.required
     then:
       function: schema
       functionOptions:
@@ -169,24 +187,25 @@ rules:
   fraud-detector-rule-language-enum:
     description: Rule language should define DETECTORPL enum
     severity: info
-    given: "$.components.schemas.Rule.properties.language"
+    given: $.components.schemas.Rule.properties.language
     then:
       field: enum
       function: truthy
   fraud-detector-request-body-json:
     description: Request bodies should define application/json content
     severity: warn
-    given: "$.paths[*][put,post].requestBody.content"
+    given: $.paths[*][put,post].requestBody.content
     then:
       function: schema
       functionOptions:
         schema:
           type: object
-          required: ["application/json"]
+          required:
+          - application/json
   fraud-detector-tag-key-required:
     description: Tag schema must require key field
     severity: warn
-    given: "$.components.schemas.Tag.required"
+    given: $.components.schemas.Tag.required
     then:
       function: schema
       functionOptions:
@@ -197,7 +216,83 @@ rules:
   fraud-detector-delete-not-found:
     description: DELETE operations should define 404 response
     severity: warn
-    given: "$.paths[*].delete.responses"
+    given: $.paths[*].delete.responses
     then:
-      field: "404"
+      field: '404'
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the amazonaws.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: amazonaws\.com
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[a-z][A-Za-z0-9]*$
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  operation-documents-400:
+    description: Operations should document a 400 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '400'
+      function: truthy
+  operation-documents-500:
+    description: Operations should document a 500 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '500'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
