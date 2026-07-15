@@ -72,6 +72,8 @@ apis:
       - type: APIReference
         url: https://docs.aws.amazon.com/frauddetector/latest/api/Welcome.html
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-fraud-detector-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-fraud-detector-trust-center.yml
   - type: VulnerabilityDisclosure
