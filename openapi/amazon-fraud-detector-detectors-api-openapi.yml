@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: Amazon Fraud Detector Detectors API
+  description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
+  version: '2019-11-15'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://frauddetector.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Detectors
+  description: Fraud detector configurations
+paths:
+  /detectors:
+    put:
+      operationId: putDetector
+      summary: Put Detector
+      description: Creates or updates a detector.
+      tags:
+      - Detectors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutDetectorRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: getDetectors
+      summary: Get Detectors
+      description: Gets all detectors or a single detector if a detectorId is specified.
+      tags:
+      - Detectors
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                detectorId:
+                  type: string
+                nextToken:
+                  type: string
+                maxResults:
+                  type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detectors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Detector'
+                  nextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    detectors:
+                    - detectorId: payment-fraud-detector
+                      description: Detects payment fraud
+                      eventTypeName: transaction
+                      arn: arn:aws:frauddetector:us-east-1:123456789012:detector/payment-fraud-detector
+                      lastUpdatedTime: '2025-06-01T10:00:00Z'
+                      createdTime: '2025-01-01T08:00:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /detectors/{detectorId}:
+    delete:
+      operationId: deleteDetector
+      summary: Delete Detector
+      description: Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.
+      tags:
+      - Detectors
+      parameters:
+      - name: detectorId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ID of the detector to delete.
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PutDetectorRequest:
+      type: object
+      required:
+      - detectorId
+      - eventTypeName
+      properties:
+        detectorId:
+          type: string
+        description:
+          type: string
+        eventTypeName:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+    Detector:
+      type: object
+      description: An Amazon Fraud Detector detector that orchestrates ML models and rules for fraud decisions.
+      properties:
+        detectorId:
+          type: string
+        description:
+          type: string
+        eventTypeName:
+          type: string
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
+      required:
+      - detectorId
+      - eventTypeName
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

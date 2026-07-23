@@ -1,0 +1,189 @@
+openapi: 3.1.0
+info:
+  title: Amazon Fraud Detector Detectors Models API
+  description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
+  version: '2019-11-15'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://frauddetector.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Models
+  description: ML model training and versioning
+paths:
+  /models:
+    put:
+      operationId: putModel
+      summary: Put Model
+      description: Creates or updates a model.
+      tags:
+      - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutModelRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: getModels
+      summary: Get Models
+      description: Gets one or more models.
+      tags:
+      - Models
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelId:
+                  type: string
+                modelType:
+                  type: string
+                nextToken:
+                  type: string
+                maxResults:
+                  type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  models:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Model'
+                  nextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    models:
+                    - modelId: fraud-model-v1
+                      modelType: ONLINE_FRAUD_INSIGHTS
+                      description: Online fraud ML model
+                      eventTypeName: transaction
+                      arn: arn:aws:frauddetector:us-east-1:123456789012:model/fraud-model-v1
+                      lastUpdatedTime: '2025-06-01T10:00:00Z'
+                      createdTime: '2025-01-01T08:00:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Model:
+      type: object
+      description: An Amazon Fraud Detector ML model trained on labeled transaction data.
+      properties:
+        modelId:
+          type: string
+        modelType:
+          type: string
+          enum:
+          - ONLINE_FRAUD_INSIGHTS
+          - TRANSACTION_FRAUD_INSIGHTS
+          - ACCOUNT_TAKEOVER_INSIGHTS
+        description:
+          type: string
+        eventTypeName:
+          type: string
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
+      required:
+      - modelId
+      - modelType
+      - eventTypeName
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+    PutModelRequest:
+      type: object
+      required:
+      - modelId
+      - modelType
+      - eventTypeName
+      properties:
+        modelId:
+          type: string
+        modelType:
+          type: string
+        description:
+          type: string
+        eventTypeName:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Amazon Fraud Detector Detectors Rules API
+  description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
+  version: '2019-11-15'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://frauddetector.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Rules
+  description: Business logic rules for fraud decisions
+paths:
+  /rules:
+    put:
+      operationId: createRule
+      summary: Create Rule
+      description: Creates a rule for use with the specified detector.
+      tags:
+      - Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rule:
+                    $ref: '#/components/schemas/Rule'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    rule:
+                      ruleId: high-risk-rule
+                      detectorId: payment-fraud-detector
+                      ruleVersion: '1'
+                      description: Flag high-risk transactions
+                      language: DETECTORPL
+                      expression: $model_score > 900
+                      outcomes:
+                      - high_risk_block
+                      arn: arn:aws:frauddetector:us-east-1:123456789012:rule/payment-fraud-detector/high-risk-rule/1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: getRules
+      summary: Get Rules
+      description: Gets all rules for a detector.
+      tags:
+      - Rules
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                detectorId:
+                  type: string
+                ruleId:
+                  type: string
+                ruleVersion:
+                  type: string
+                nextToken:
+                  type: string
+                maxResults:
+                  type: integer
+              required:
+              - detectorId
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ruleDetails:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleDetail'
+                  nextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    ruleDetails:
+                    - ruleId: high-risk-rule
+                      detectorId: payment-fraud-detector
+                      ruleVersion: '1'
+                      description: Flag high-risk transactions
+                      language: DETECTORPL
+                      expression: $model_score > 900
+                      outcomes:
+                      - high_risk_block
+                      arn: arn:aws:frauddetector:us-east-1:123456789012:rule/payment-fraud-detector/high-risk-rule/1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateRuleRequest:
+      type: object
+      required:
+      - ruleId
+      - detectorId
+      - expression
+      - language
+      - outcomes
+      properties:
+        ruleId:
+          type: string
+        detectorId:
+          type: string
+        description:
+          type: string
+        expression:
+          type: string
+        language:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    RuleDetail:
+      type: object
+      description: Detailed information about a Fraud Detector rule.
+      properties:
+        ruleId:
+          type: string
+        description:
+          type: string
+        detectorId:
+          type: string
+        ruleVersion:
+          type: string
+        expression:
+          type: string
+        language:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    Rule:
+      type: object
+      description: A rule specifying conditions and outcomes for fraud detection decisions.
+      properties:
+        ruleId:
+          type: string
+        detectorId:
+          type: string
+        ruleVersion:
+          type: string
+        description:
+          type: string
+        language:
+          type: string
+          enum:
+          - DETECTORPL
+        expression:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        arn:
+          type: string
+      required:
+      - ruleId
+      - detectorId
+      - expression
+      - language
+      - outcomes
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

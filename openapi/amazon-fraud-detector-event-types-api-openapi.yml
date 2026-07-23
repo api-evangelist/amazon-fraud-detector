@@ -1,0 +1,210 @@
+openapi: 3.1.0
+info:
+  title: Amazon Fraud Detector Detectors Event Types API
+  description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
+  version: '2019-11-15'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://frauddetector.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Event Types
+  description: Event schema definitions
+paths:
+  /event-types:
+    put:
+      operationId: putEventType
+      summary: Put Event Type
+      description: Creates or updates an event type.
+      tags:
+      - Event Types
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventTypeRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: getEventTypes
+      summary: Get Event Types
+      description: Gets all event types or a specific event type if a name is provided.
+      tags:
+      - Event Types
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                nextToken:
+                  type: string
+                maxResults:
+                  type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eventTypes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventType'
+                  nextToken:
+                    type: string
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    eventTypes:
+                    - name: transaction
+                      description: Payment transaction event
+                      eventVariables:
+                      - transaction_amount
+                      - ip_address
+                      - email
+                      labels:
+                      - fraud
+                      - legit
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    EventType:
+      type: object
+      description: A schema defining the structure of events analyzed by a Fraud Detector.
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        eventVariables:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        entityTypes:
+          type: array
+          items:
+            type: string
+        eventIngestion:
+          type: string
+          enum:
+          - ENABLED
+          - DISABLED
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
+      required:
+      - name
+      - eventVariables
+      - labels
+      - entityTypes
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+    PutEventTypeRequest:
+      type: object
+      required:
+      - name
+      - eventVariables
+      - labels
+      - entityTypes
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        eventVariables:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        entityTypes:
+          type: array
+          items:
+            type: string
+        eventIngestion:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4

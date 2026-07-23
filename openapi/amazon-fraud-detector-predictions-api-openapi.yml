@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Amazon Fraud Detector Detectors Predictions API
+  description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
+  version: '2019-11-15'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://frauddetector.{region}.amazonaws.com
+  variables:
+    region:
+      default: us-east-1
+security:
+- awsSigV4: []
+tags:
+- name: Predictions
+  description: Real-time fraud prediction
+paths:
+  /predictions/event/{eventId}:
+    post:
+      operationId: getEventPrediction
+      summary: Get Event Prediction
+      description: Evaluates an event against a detector version and returns prediction outcomes.
+      tags:
+      - Predictions
+      parameters:
+      - name: eventId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique ID of the event.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEventPredictionRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventPredictionResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    modelScores:
+                    - modelVersion:
+                        modelId: fraud-model-v1
+                        modelType: ONLINE_FRAUD_INSIGHTS
+                        modelVersionNumber: '1.0'
+                      scores:
+                        model_score: 850.0
+                    ruleResults:
+                    - ruleId: high-risk-rule
+                      outcomes:
+                      - review
+                    externalModelOutputs: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    GetEventPredictionRequest:
+      type: object
+      required:
+      - detectorId
+      - eventId
+      - eventTypeName
+      - eventTimestamp
+      - entities
+      - eventVariables
+      properties:
+        detectorId:
+          type: string
+        detectorVersionId:
+          type: string
+        eventId:
+          type: string
+        eventTypeName:
+          type: string
+        eventTimestamp:
+          type: string
+        entities:
+          type: array
+          items:
+            type: object
+        eventVariables:
+          type: object
+          additionalProperties:
+            type: string
+    GetEventPredictionResponse:
+      type: object
+      properties:
+        modelScores:
+          type: array
+          items:
+            type: object
+        ruleResults:
+          type: array
+          items:
+            type: object
+        externalModelOutputs:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    awsSigV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4
