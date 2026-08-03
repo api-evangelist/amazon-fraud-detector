@@ -1,0 +1,26 @@
+{
+  "provider": "amazon-fraud-detector",
+  "sources": [
+    "amazon-fraud-detector-detectors-api-openapi.yml",
+    "amazon-fraud-detector-event-types-api-openapi.yml",
+    "amazon-fraud-detector-labels-api-openapi.yml",
+    "amazon-fraud-detector-models-api-openapi.yml",
+    "amazon-fraud-detector-predictions-api-openapi.yml",
+    "amazon-fraud-detector-rules-api-openapi.yml",
+    "amazon-fraud-detector-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-fraud-detector-detectors-api-openapi.yml",
+    "amazon-fraud-detector-event-types-api-openapi.yml",
+    "amazon-fraud-detector-labels-api-openapi.yml",
+    "amazon-fraud-detector-models-api-openapi.yml",
+    "amazon-fraud-detector-predictions-api-openapi.yml",
+    "amazon-fraud-detector-rules-api-openapi.yml",
+    "amazon-fraud-detector-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
