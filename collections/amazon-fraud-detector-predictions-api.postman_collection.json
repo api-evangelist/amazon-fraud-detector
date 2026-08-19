@@ -1,0 +1,335 @@
+{
+  "item": [
+    {
+      "id": "b38c9d5c-224c-42e8-a5b1-4184b0eb14c0",
+      "name": "Predictions",
+      "description": {
+        "content": "Real-time fraud prediction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cf1e08b-676c-44a4-a3cc-0e681a1c3f9c",
+          "name": "Get Event Prediction",
+          "request": {
+            "name": "Get Event Prediction",
+            "description": {
+              "content": "Evaluates an event against a detector version and returns prediction outcomes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "predictions",
+                "event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) The unique ID of the event."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"detectorId\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"eventTypeName\": \"<string>\",\n  \"eventTimestamp\": \"<string>\",\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"eventVariables\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"detectorVersionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a3bc427-f089-4594-8567-03cb0688f3f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predictions",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The unique ID of the event."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detectorId\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"eventTypeName\": \"<string>\",\n  \"eventTimestamp\": \"<string>\",\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"eventVariables\": {\n    \"key_0\": \"<string>\"\n  },\n  \"detectorVersionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"modelScores\": [\n    {\n      \"modelVersion\": {\n        \"modelId\": \"fraud-model-v1\",\n        \"modelType\": \"ONLINE_FRAUD_INSIGHTS\",\n        \"modelVersionNumber\": \"1.0\"\n      },\n      \"scores\": {\n        \"model_score\": 850\n      }\n    }\n  ],\n  \"ruleResults\": [\n    {\n      \"ruleId\": \"high-risk-rule\",\n      \"outcomes\": [\n        \"review\"\n      ]\n    }\n  ],\n  \"externalModelOutputs\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75b39b61-a403-4da6-8924-7e5c3dc8089e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predictions",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The unique ID of the event."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detectorId\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"eventTypeName\": \"<string>\",\n  \"eventTimestamp\": \"<string>\",\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"eventVariables\": {\n    \"key_0\": \"<string>\"\n  },\n  \"detectorVersionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6713eac9-080f-4cc2-8ac0-f57d80cae6b9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "predictions",
+                    "event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The unique ID of the event."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"detectorId\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"eventTypeName\": \"<string>\",\n  \"eventTimestamp\": \"<string>\",\n  \"entities\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"eventVariables\": {\n    \"key_0\": \"<string>\"\n  },\n  \"detectorVersionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://frauddetector.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab5ce31a-2c84-49d2-acfd-cdd5df395ea9",
+    "name": "Amazon Fraud Detector Detectors Predictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Fraud Detector Detectors Models API",
+    "version": "2019-11-15"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://frauddetector.{region}.amazonaws.com/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets one or more models."
+        },
+        {
+          "info": {
+            "name": "Put Model",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://frauddetector.{region}.amazonaws.com/models",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a model."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
