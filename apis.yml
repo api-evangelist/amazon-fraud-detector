@@ -21,6 +21,12 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-fraud-detector.png
 tags:
   - AWS
+  - Financial-Services
+  - Fraud Detection
+  - Machine-Learning
+  - Security
+tags_raw:
+  - AWS
   - Financial Services
   - Fraud Detection
   - Machine Learning
