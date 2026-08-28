@@ -13,8 +13,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: fraudDetectorApi
-  url: ../openapi/amazon-fraud-detector-openapi.yml
+- name: eventTypesApi
+  url: ../openapi/amazon-fraud-detector-event-types-api-openapi.yml
+  type: openapi
+- name: labelsApi
+  url: ../openapi/amazon-fraud-detector-labels-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: bootstrap-event-type

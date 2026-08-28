@@ -10,8 +10,8 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: fraudDetectorApi
-  url: ../openapi/amazon-fraud-detector-openapi.yml
+- name: tagsApi
+  url: ../openapi/amazon-fraud-detector-tags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: tag-and-audit-resource

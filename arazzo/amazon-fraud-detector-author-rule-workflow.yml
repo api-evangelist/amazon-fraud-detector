@@ -10,8 +10,8 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: fraudDetectorApi
-  url: ../openapi/amazon-fraud-detector-openapi.yml
+- name: rulesApi
+  url: ../openapi/amazon-fraud-detector-rules-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: author-rule

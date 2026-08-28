@@ -10,8 +10,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: fraudDetectorApi
-  url: ../openapi/amazon-fraud-detector-openapi.yml
+- name: detectorsApi
+  url: ../openapi/amazon-fraud-detector-detectors-api-openapi.yml
+  type: openapi
+- name: modelsApi
+  url: ../openapi/amazon-fraud-detector-models-api-openapi.yml
+  type: openapi
+- name: tagsApi
+  url: ../openapi/amazon-fraud-detector-tags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: inventory-models-detectors
