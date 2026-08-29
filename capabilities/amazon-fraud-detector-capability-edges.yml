@@ -1,0 +1,34 @@
+slug: amazon-fraud-detector
+provider: Amazon Fraud Detector
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Predictions
+  spec_file: amazon-fraud-detector-predictions-api-openapi.yml
+  capability_id: BC-1400.30
+  capability_id_l1: BC-1400
+  capability_name: Fraud Detection & Investigation Management
+  confidence: 0.75
+  evidence: POST /predictions/event/{eventId}  getEventPrediction  Get Event Prediction
+  reason: Runtime scoring of an event for fraud risk — the actual fraud detection act, per vendor description
+    'distinguish between legitimate and high-risk transactions'.
+- tag: Detectors
+  spec_file: amazon-fraud-detector-detectors-api-openapi.yml
+  capability_id: BC-1400.30
+  capability_id_l1: BC-1400
+  capability_name: Fraud Detection & Investigation Management
+  confidence: 0.7
+  evidence: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially
+    fraudulent activities
+  reason: Detectors are the configured fraud-detection logic units of a fraud detection service; maps
+    to Fraud Detection & Investigation Management, though the surface is model/config management.

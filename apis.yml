@@ -399,6 +399,9 @@ apis:
   - type: APIReference
     url: https://docs.aws.amazon.com/frauddetector/latest/api/Welcome.html
 common:
+  - type: CapabilityMap
+    url: capabilities/amazon-fraud-detector-capability-edges.yml
+    name: Amazon Fraud Detector Business Capability Map
   - type: AgenticAccess
     url: agentic-access/amazon-fraud-detector-agentic-access.yml
   - type: TrustCenter
