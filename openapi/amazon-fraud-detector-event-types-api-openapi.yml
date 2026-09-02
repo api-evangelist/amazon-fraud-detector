@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Fraud Detector Detectors Event Types API
   description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
@@ -115,6 +115,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     EventType:
       type: object
       description: A schema defining the structure of events analyzed by a Fraud Detector.
@@ -153,17 +172,6 @@ components:
       - eventVariables
       - labels
       - entityTypes
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
     PutEventTypeRequest:
       type: object
       required:
@@ -194,14 +202,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey

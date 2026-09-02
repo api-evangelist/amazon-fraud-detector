@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon Fraud Detector Detectors Rules API
   description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
@@ -169,6 +169,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
     RuleDetail:
       type: object
       description: Detailed information about a Fraud Detector rule.
@@ -235,17 +246,6 @@ components:
       - expression
       - language
       - outcomes
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
   securitySchemes:
     awsSigV4:
       type: apiKey
