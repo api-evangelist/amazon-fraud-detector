@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Fraud Detector Detectors Rules API
+  title: Amazon Fraud Detector Rules API
   description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
   version: '2019-11-15'
   contact:
@@ -142,33 +142,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateRuleRequest:
+    ErrorResponse:
       type: object
-      required:
-      - ruleId
-      - detectorId
-      - expression
-      - language
-      - outcomes
+      description: Standard error response from the Amazon Fraud Detector API.
       properties:
-        ruleId:
+        message:
           type: string
-        detectorId:
+        code:
           type: string
-        description:
-          type: string
-        expression:
-          type: string
-        language:
-          type: string
-        outcomes:
-          type: array
-          items:
-            type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.
@@ -208,14 +189,6 @@ components:
           format: date-time
         arn:
           type: string
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
     Rule:
       type: object
       description: A rule specifying conditions and outcomes for fraud detection decisions.
@@ -246,6 +219,33 @@ components:
       - expression
       - language
       - outcomes
+    CreateRuleRequest:
+      type: object
+      required:
+      - ruleId
+      - detectorId
+      - expression
+      - language
+      - outcomes
+      properties:
+        ruleId:
+          type: string
+        detectorId:
+          type: string
+        description:
+          type: string
+        expression:
+          type: string
+        language:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
   securitySchemes:
     awsSigV4:
       type: apiKey

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Fraud Detector Detectors Predictions API
+  title: Amazon Fraud Detector Predictions API
   description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
   version: '2019-11-15'
   contact:
@@ -80,21 +80,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetEventPredictionResponse:
-      type: object
-      properties:
-        modelScores:
-          type: array
-          items:
-            type: object
-        ruleResults:
-          type: array
-          items:
-            type: object
-        externalModelOutputs:
-          type: array
-          items:
-            type: object
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Fraud Detector API.
@@ -131,6 +116,21 @@ components:
           type: object
           additionalProperties:
             type: string
+    GetEventPredictionResponse:
+      type: object
+      properties:
+        modelScores:
+          type: array
+          items:
+            type: object
+        ruleResults:
+          type: array
+          items:
+            type: object
+        externalModelOutputs:
+          type: array
+          items:
+            type: object
   securitySchemes:
     awsSigV4:
       type: apiKey

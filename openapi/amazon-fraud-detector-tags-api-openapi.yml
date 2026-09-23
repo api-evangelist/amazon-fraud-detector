@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Fraud Detector Detectors Tags API
+  title: Amazon Fraud Detector Tags API
   description: Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities.
   version: '2019-11-15'
   contact:
@@ -116,6 +116,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.
@@ -127,14 +135,6 @@ components:
       required:
       - key
       - value
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey

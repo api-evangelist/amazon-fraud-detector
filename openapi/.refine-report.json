@@ -1,13 +1,7 @@
 {
   "provider": "amazon-fraud-detector",
   "sources": [
-    "amazon-fraud-detector-detectors-api-openapi.yml",
-    "amazon-fraud-detector-event-types-api-openapi.yml",
-    "amazon-fraud-detector-labels-api-openapi.yml",
-    "amazon-fraud-detector-models-api-openapi.yml",
-    "amazon-fraud-detector-predictions-api-openapi.yml",
-    "amazon-fraud-detector-rules-api-openapi.yml",
-    "amazon-fraud-detector-tags-api-openapi.yml"
+    "_original/amazon-fraud-detector-openapi.yml"
   ],
   "outputs": [
     "amazon-fraud-detector-detectors-api-openapi.yml",
@@ -22,7 +16,17 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "amazon-fraud-detector-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "amazon-fraud-detector-detectors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-event-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-predictions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "amazon-fraud-detector-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
