@@ -115,14 +115,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    PutEventTypeRequest:
       type: object
-      description: Standard error response from the Amazon Fraud Detector API.
+      required:
+      - name
+      - eventVariables
+      - labels
+      - entityTypes
       properties:
-        message:
+        name:
           type: string
-        code:
+        description:
           type: string
+        eventVariables:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        entityTypes:
+          type: array
+          items:
+            type: string
+        eventIngestion:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.
@@ -172,36 +194,14 @@ components:
       - eventVariables
       - labels
       - entityTypes
-    PutEventTypeRequest:
+    ErrorResponse:
       type: object
-      required:
-      - name
-      - eventVariables
-      - labels
-      - entityTypes
+      description: Standard error response from the Amazon Fraud Detector API.
       properties:
-        name:
+        message:
           type: string
-        description:
+        code:
           type: string
-        eventVariables:
-          type: array
-          items:
-            type: string
-        labels:
-          type: array
-          items:
-            type: string
-        entityTypes:
-          type: array
-          items:
-            type: string
-        eventIngestion:
-          type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
   securitySchemes:
     awsSigV4:
       type: apiKey

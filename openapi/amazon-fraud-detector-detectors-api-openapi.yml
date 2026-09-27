@@ -150,6 +150,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Detector:
+      type: object
+      description: An Amazon Fraud Detector detector that orchestrates ML models and rules for fraud decisions.
+      properties:
+        detectorId:
+          type: string
+        description:
+          type: string
+        eventTypeName:
+          type: string
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
+      required:
+      - detectorId
+      - eventTypeName
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
     PutDetectorRequest:
       type: object
       required:
@@ -174,38 +206,6 @@ components:
           type: string
         code:
           type: string
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
-    Detector:
-      type: object
-      description: An Amazon Fraud Detector detector that orchestrates ML models and rules for fraud decisions.
-      properties:
-        detectorId:
-          type: string
-        description:
-          type: string
-        eventTypeName:
-          type: string
-        lastUpdatedTime:
-          type: string
-          format: date-time
-        createdTime:
-          type: string
-          format: date-time
-        arn:
-          type: string
-      required:
-      - detectorId
-      - eventTypeName
   securitySchemes:
     awsSigV4:
       type: apiKey
