@@ -145,17 +145,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
     EventType:
       type: object
       description: A schema defining the structure of events analyzed by a Fraud Detector.
@@ -202,6 +191,17 @@ components:
           type: string
         code:
           type: string
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
   securitySchemes:
     awsSigV4:
       type: apiKey

@@ -142,45 +142,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
-    RuleDetail:
-      type: object
-      description: Detailed information about a Fraud Detector rule.
-      properties:
-        ruleId:
-          type: string
-        description:
-          type: string
-        detectorId:
-          type: string
-        ruleVersion:
-          type: string
-        expression:
-          type: string
-        language:
-          type: string
-        outcomes:
-          type: array
-          items:
-            type: string
-        lastUpdatedTime:
-          type: string
-          format: date-time
-        createdTime:
-          type: string
-          format: date-time
-        arn:
-          type: string
     Rule:
       type: object
       description: A rule specifying conditions and outcomes for fraud detection decisions.
@@ -238,6 +199,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    RuleDetail:
+      type: object
+      description: Detailed information about a Fraud Detector rule.
+      properties:
+        ruleId:
+          type: string
+        description:
+          type: string
+        detectorId:
+          type: string
+        ruleVersion:
+          type: string
+        expression:
+          type: string
+        language:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        createdTime:
+          type: string
+          format: date-time
+        arn:
+          type: string
     ErrorResponse:
       type: object
       description: Standard error response from the Amazon Fraud Detector API.
@@ -246,6 +235,17 @@ components:
           type: string
         code:
           type: string
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
   securitySchemes:
     awsSigV4:
       type: apiKey
