@@ -145,6 +145,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     EventType:
       type: object
       description: A schema defining the structure of events analyzed by a Fraud Detector.
@@ -183,14 +191,6 @@ components:
       - eventVariables
       - labels
       - entityTypes
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.

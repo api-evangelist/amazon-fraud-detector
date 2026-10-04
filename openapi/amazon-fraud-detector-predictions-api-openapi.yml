@@ -80,21 +80,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    GetEventPredictionResponse:
+    ErrorResponse:
       type: object
+      description: Standard error response from the Amazon Fraud Detector API.
       properties:
-        modelScores:
-          type: array
-          items:
-            type: object
-        ruleResults:
-          type: array
-          items:
-            type: object
-        externalModelOutputs:
-          type: array
-          items:
-            type: object
+        message:
+          type: string
+        code:
+          type: string
     GetEventPredictionRequest:
       type: object
       required:
@@ -123,14 +116,21 @@ components:
           type: object
           additionalProperties:
             type: string
-    ErrorResponse:
+    GetEventPredictionResponse:
       type: object
-      description: Standard error response from the Amazon Fraud Detector API.
       properties:
-        message:
-          type: string
-        code:
-          type: string
+        modelScores:
+          type: array
+          items:
+            type: object
+        ruleResults:
+          type: array
+          items:
+            type: object
+        externalModelOutputs:
+          type: array
+          items:
+            type: object
   securitySchemes:
     awsSigV4:
       type: apiKey

@@ -142,36 +142,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Rule:
-      type: object
-      description: A rule specifying conditions and outcomes for fraud detection decisions.
-      properties:
-        ruleId:
-          type: string
-        detectorId:
-          type: string
-        ruleVersion:
-          type: string
-        description:
-          type: string
-        language:
-          type: string
-          enum:
-          - DETECTORPL
-        expression:
-          type: string
-        outcomes:
-          type: array
-          items:
-            type: string
-        arn:
-          type: string
-      required:
-      - ruleId
-      - detectorId
-      - expression
-      - language
-      - outcomes
     CreateRuleRequest:
       type: object
       required:
@@ -227,14 +197,6 @@ components:
           format: date-time
         arn:
           type: string
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.
@@ -246,6 +208,44 @@ components:
       required:
       - key
       - value
+    Rule:
+      type: object
+      description: A rule specifying conditions and outcomes for fraud detection decisions.
+      properties:
+        ruleId:
+          type: string
+        detectorId:
+          type: string
+        ruleVersion:
+          type: string
+        description:
+          type: string
+        language:
+          type: string
+          enum:
+          - DETECTORPL
+        expression:
+          type: string
+        outcomes:
+          type: array
+          items:
+            type: string
+        arn:
+          type: string
+      required:
+      - ruleId
+      - detectorId
+      - expression
+      - language
+      - outcomes
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey
