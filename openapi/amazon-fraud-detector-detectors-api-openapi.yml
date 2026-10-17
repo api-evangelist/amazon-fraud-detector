@@ -150,6 +150,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Tag:
+      type: object
+      description: A metadata label applied to a Fraud Detector resource.
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
     PutDetectorRequest:
       type: object
       required:
@@ -166,14 +185,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
     Detector:
       type: object
       description: An Amazon Fraud Detector detector that orchestrates ML models and rules for fraud decisions.
@@ -195,17 +206,6 @@ components:
       required:
       - detectorId
       - eventTypeName
-    Tag:
-      type: object
-      description: A metadata label applied to a Fraud Detector resource.
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
   securitySchemes:
     awsSigV4:
       type: apiKey

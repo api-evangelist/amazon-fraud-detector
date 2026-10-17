@@ -64,14 +64,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Standard error response from the Amazon Fraud Detector API.
-      properties:
-        message:
-          type: string
-        code:
-          type: string
     Tag:
       type: object
       description: A metadata label applied to a Fraud Detector resource.
@@ -83,6 +75,14 @@ components:
       required:
       - key
       - value
+    ErrorResponse:
+      type: object
+      description: Standard error response from the Amazon Fraud Detector API.
+      properties:
+        message:
+          type: string
+        code:
+          type: string
   securitySchemes:
     awsSigV4:
       type: apiKey
