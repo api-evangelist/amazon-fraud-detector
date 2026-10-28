@@ -1,4 +1,4 @@
-# Amazon Fraud Detector (amazon-fraud-detector)
+# Amazon Fraud Detector
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,91 +66,210 @@
 
 Amazon Fraud Detector is a fully managed service that uses machine learning to identify potentially fraudulent activities and accurately distinguish between legitimate and high-risk transactions. It uses your data and the same technology that Amazon uses to protect its own business from fraud.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amazon-fraud-detector/refs/heads/main/apis.yml)
+**Areas:** AWS · Financial Services · Fraud Prevention · Machine Learning · Security
 
-## Scope
+## Amazon Fraud Detector on APIs.io
 
-- **Type:** Index
+Everything profiled for Amazon Fraud Detector is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amazon-fraud-detector/](https://apis.io/providers/amazon-fraud-detector/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (18)
 
-- AWS
-- Financial Services
-- Fraud Detection
-- Machine Learning
-- Security
+- [Amazon Fraud Detector Detectors API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-detectors-api/) — Fraud detector configurations
+- [Amazon Fraud Detector Event Types API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-event-types-api/) — Event schema definitions
+- [Amazon Fraud Detector Labels API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-labels-api/) — Fraud and legitimate transaction labels
+- [Amazon Fraud Detector Models API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-models-api/) — ML model training and versioning
+- [Amazon Fraud Detector Predictions API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-predictions-api/) — Real-time fraud prediction
+- [Amazon Fraud Detector Rules API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-rules-api/) — Business logic rules for fraud decisions
+- [Amazon Fraud Detector Tags API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-tags-api/) — Resource metadata labels
+- [Amazon Fraud Detector Fraud Detector Batch Import Job API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-batch-import-job-api/) — The Fraud Detector Batch Import Job API from Amazon Fraud Detector — 4 operation(s) for fraud detector batch import job.
+- [Amazon Fraud Detector Fraud Detector Batch Prediction Job API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-batch-prediction-job-api/) — The Fraud Detector Batch Prediction Job API from Amazon Fraud Detector — 4 operation(s) for fraud detector batch prediction job.
+- [Amazon Fraud Detector Fraud Detector Detector Version API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-detector-version-api/) — The Fraud Detector Detector Version API from Amazon Fraud Detector — 4 operation(s) for fraud detector detector version.
+- [Amazon Fraud Detector Fraud Detector Entity Type API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-entity-type-api/) — The Fraud Detector Entity Type API from Amazon Fraud Detector — 3 operation(s) for fraud detector entity type.
+- [Amazon Fraud Detector Fraud Detector Event API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-event-api/) — The Fraud Detector Event API from Amazon Fraud Detector — 4 operation(s) for fraud detector event.
+- [Amazon Fraud Detector Fraud Detector External Model API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-external-model-api/) — The Fraud Detector External Model API from Amazon Fraud Detector — 3 operation(s) for fraud detector external model.
+- [Amazon Fraud Detector Fraud Detector List API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-list-api/) — The Fraud Detector List API from Amazon Fraud Detector — 3 operation(s) for fraud detector list.
+- [Amazon Fraud Detector Fraud Detector Model Version API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-model-version-api/) — The Fraud Detector Model Version API from Amazon Fraud Detector — 5 operation(s) for fraud detector model version.
+- [Amazon Fraud Detector Fraud Detector Operations API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-operations-api/) — The Fraud Detector Operations API from Amazon Fraud Detector — 15 operation(s) for fraud detector operations.
+- [Amazon Fraud Detector Fraud Detector Outcome API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-outcome-api/) — The Fraud Detector Outcome API from Amazon Fraud Detector — 3 operation(s) for fraud detector outcome.
+- [Amazon Fraud Detector Fraud Detector Variable API](https://apis.io/apis/amazon-fraud-detector/amazon-fraud-detector-variable-api/) — The Fraud Detector Variable API from Amazon Fraud Detector — 6 operation(s) for fraud detector variable.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (8)
 
-### Amazon Fraud Detector API
+Multi-step workflows that chain operations into a business task.
 
-The Amazon Fraud Detector API provides programmatic access to create and manage detectors, models, event types, entities, labels, outcomes, rules, and variables for automated fraud detection workflows.
+- [Amazon Fraud Detector Author Rule](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-author-rule-workflow/)
+- [Amazon Fraud Detector Bootstrap Event Type](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-bootstrap-event-type-workflow/)
+- [Amazon Fraud Detector Decommission Detector](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-decommission-detector-workflow/)
+- [Amazon Fraud Detector Detector Pipeline](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-detector-pipeline-workflow/)
+- [Amazon Fraud Detector Inventory Models and Detectors](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-inventory-models-detectors-workflow/)
+- [Amazon Fraud Detector Provision Model and Detector](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-provision-model-detector-workflow/)
+- [Amazon Fraud Detector Score Event and Tag](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-score-event-and-tag-workflow/)
+- [Amazon Fraud Detector Tag and Audit Resource](https://apis.io/arazzos/amazon-fraud-detector/amazon-fraud-detector-tag-and-audit-resource-workflow/)
 
-- **Human URL:** [https://aws.amazon.com/fraud-detector/](https://aws.amazon.com/fraud-detector/)
-- **Base URL:** `https://frauddetector.amazonaws.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Fraud Detection
-- Machine Learning
-- Security
+- [Amazon Fraud Detector Agentic Access](https://apis.io/agentic-access/amazon-fraud-detector/amazon-fraud-detector-agentic-access/)
 
-#### Properties
+#### JSON Schema (5)
 
-- [Documentation](https://docs.aws.amazon.com/frauddetector/latest/ug/what-is-frauddetector.html)
-- [OpenAPI](openapi/amazon-fraud-detector-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amazon-fraud-detector.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amazon-fraud-detector.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/amazon-fraud-detector-detector-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amazon-fraud-detector-model-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amazon-fraud-detector-rule-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amazon-fraud-detector-event-type-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amazon-fraud-detector-tag-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/amazon-fraud-detector-detector-structure.json)
-- [JSON Structure](json-structure/amazon-fraud-detector-model-structure.json)
-- [JSON Structure](json-structure/amazon-fraud-detector-rule-structure.json)
-- [JSON Structure](json-structure/amazon-fraud-detector-event-type-structure.json)
-- [JSON Structure](json-structure/amazon-fraud-detector-tag-structure.json)
-- [Example](examples/amazon-fraud-detector-detector-example.json)
-- [Example](examples/amazon-fraud-detector-model-example.json)
-- [Example](examples/amazon-fraud-detector-rule-example.json)
-- [Example](examples/amazon-fraud-detector-event-type-example.json)
-- [Example](examples/amazon-fraud-detector-tag-example.json)
-- [Getting Started](https://aws.amazon.com/fraud-detector/getting-started/)
-- [Pricing](https://aws.amazon.com/fraud-detector/pricing/)
-- [F A Q](https://aws.amazon.com/fraud-detector/faqs/)
-- [API Reference](https://docs.aws.amazon.com/frauddetector/latest/api/Welcome.html)
+The data models the API reads and writes.
 
-## Common Properties
+- [Detector](https://apis.io/schemas/amazon-fraud-detector/amazon-fraud-detector-detector/)
+- [EventType](https://apis.io/schemas/amazon-fraud-detector/amazon-fraud-detector-event-type/)
+- [Model](https://apis.io/schemas/amazon-fraud-detector/amazon-fraud-detector-model/)
+- [Rule](https://apis.io/schemas/amazon-fraud-detector/amazon-fraud-detector-rule/)
+- [Tag](https://apis.io/schemas/amazon-fraud-detector/amazon-fraud-detector-tag/)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://aws.amazon.com/fraud-detector/)
+#### JSON Structure (5)
+
+Data models expressed in JSON Structure.
+
+- [Amazon Fraud Detector Detector Structure](https://apis.io/json-structure/amazon-fraud-detector/amazon-fraud-detector-detector-structure/)
+- [Amazon Fraud Detector Event Type Structure](https://apis.io/json-structure/amazon-fraud-detector/amazon-fraud-detector-event-type-structure/)
+- [Amazon Fraud Detector Model Structure](https://apis.io/json-structure/amazon-fraud-detector/amazon-fraud-detector-model-structure/)
+- [Amazon Fraud Detector Rule Structure](https://apis.io/json-structure/amazon-fraud-detector/amazon-fraud-detector-rule-structure/)
+- [Amazon Fraud Detector Tag Structure](https://apis.io/json-structure/amazon-fraud-detector/amazon-fraud-detector-tag-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amazon Fraud Detector Context](https://apis.io/jsonld/amazon-fraud-detector/amazon-fraud-detector-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amazon Fraud Detector Vocabulary](https://apis.io/vocabularies/amazon-fraud-detector/amazon-fraud-detector-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Amazon Fraud Detector Detector Example](https://apis.io/examples/amazon-fraud-detector/amazon-fraud-detector-detector-example/)
+- [Amazon Fraud Detector Event Type Example](https://apis.io/examples/amazon-fraud-detector/amazon-fraud-detector-event-type-example/)
+- [Amazon Fraud Detector Model Example](https://apis.io/examples/amazon-fraud-detector/amazon-fraud-detector-model-example/)
+- [Amazon Fraud Detector Rule Example](https://apis.io/examples/amazon-fraud-detector/amazon-fraud-detector-rule-example/)
+- [Amazon Fraud Detector Tag Example](https://apis.io/examples/amazon-fraud-detector/amazon-fraud-detector-tag-example/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Amazon Fraud Detector API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector/)
+- [Amazon Fraud Detector Detectors API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-detectors-api/)
+- [Amazon Fraud Detector Detectors Event Types API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-event-types-api/)
+- [Amazon Fraud Detector Detectors Labels API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-labels-api/)
+- [Amazon Fraud Detector Detectors Models API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-models-api/)
+- [Amazon Fraud Detector Detectors Predictions API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-predictions-api/)
+- [Amazon Fraud Detector Detectors Rules API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-rules-api/)
+- [Amazon Fraud Detector Detectors Tags API](https://apis.io/collections/amazon-fraud-detector/open-amazon-fraud-detector-tags-api/)
+- [Amazon Fraud Detector API](https://apis.io/collections/amazon-fraud-detector/postman-amazon-fraud-detector/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Amazon Fraud Detector — jsonschema rules](https://apis.io/rules/amazon-fraud-detector/amazon-fraud-detector-jsonschema-spectral-rules/)
+- [Amazon Fraud Detector API Rules](https://apis.io/rules/amazon-fraud-detector/amazon-fraud-detector-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amazon Fraud Detector Authentication](https://apis.io/security/amazon-fraud-detector/amazon-fraud-detector-authentication/)
+- [Amazon Fraud Detector Domain Security](https://apis.io/security/amazon-fraud-detector/amazon-fraud-detector-domain-security/)
+- [Amazon Fraud Detector Trust Center](https://apis.io/security/amazon-fraud-detector/amazon-fraud-detector-trust-center/)
+- [Amazon Fraud Detector Vulnerability Disclosure](https://apis.io/security/amazon-fraud-detector/amazon-fraud-detector-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amazon Fraud Detector Plans Pricing](https://apis.io/plans/amazon-fraud-detector/amazon-fraud-detector-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amazon Fraud Detector Rate Limits](https://apis.io/rate-limits/amazon-fraud-detector/amazon-fraud-detector-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amazon Fraud Detector Finops](https://apis.io/finops/amazon-fraud-detector/amazon-fraud-detector-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://aws.amazon.com/fraud-detector/)
 - [Documentation](https://docs.aws.amazon.com/frauddetector/)
-- [Terms of Service](https://aws.amazon.com/service-terms/)
-- [Privacy Policy](https://aws.amazon.com/privacy/)
 - [Support](https://aws.amazon.com/premiumsupport/)
 - [Blog](https://aws.amazon.com/blogs/machine-learning/)
-- [GitHub Organization](https://github.com/aws)
-- [Console](https://console.aws.amazon.com/frauddetector/)
-- [Sign Up](https://portal.aws.amazon.com/billing/signup)
-- [Status Page](https://health.aws.amazon.com/health/status)
-- [YouTube](https://www.youtube.com/user/AmazonWebServices)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/amazon-fraud-detector)
-- [Spectral Rules](rules/amazon-fraud-detector-spectral-rules.yml)
-- [Vocabulary](vocabulary/amazon-fraud-detector-vocabulary.yaml)
-- [JSON-LD](json-ld/amazon-fraud-detector-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Integrations](https://aws.amazon.com/marketplace)
+- [Terms of service](https://aws.amazon.com/service-terms/)
+- [Privacy policy](https://aws.amazon.com/privacy/)
+- [GitHub](https://github.com/aws)
+- [Status](https://health.aws.amazon.com/health/status)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 55.9** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 69.4 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 53.6 |
+| Access clarity | 60.5 |
+
+**Agent readiness 30.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 32.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amazon-fraud-detector/](https://apis.io/providers/amazon-fraud-detector/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amazon Fraud Detector: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amazon-fraud-detector/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
