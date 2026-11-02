@@ -1,0 +1,138 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-28'
+method: searched
+source: https://aws.amazon.com/fraud-detector/pricing/
+sources:
+- https://aws.amazon.com/fraud-detector/pricing/
+provenance:
+  tool: engine/economics/harvest_pricing.py
+  run: 20261028T141238
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-28'
+published: true
+note: Page notes Amazon Fraud Detector is no longer accepting new customers. Tiered per-prediction pricing
+  plus storage, training and hosting hourly rates.
+plan_count: 7
+currency: USD
+plans:
+- name: Data Processing and Storage
+  price_text: $0.10 per GB
+  price: 0.1
+  currency: USD
+  period: per-use
+  unit: GB
+- name: Online Fraud Insights - first 100,000 predictions per month
+  price_text: $0.0300 per prediction
+  price: 0.03
+  currency: USD
+  period: per-use
+  unit: prediction
+  included_quota: First 100,000 predictions per month
+  overage: Over 100,000 predictions per month $0.0075 per prediction
+- name: Transaction Fraud Insights - first 100,000 predictions per month
+  price_text: $0.0300 per prediction
+  price: 0.03
+  currency: USD
+  period: per-use
+  unit: prediction
+  included_quota: First 100,000 predictions per month
+  overage: Over 100,000 predictions per month $0.0075 per prediction
+- name: Rule-based Fraud Predictions - first 400,000 per month
+  price_text: $0.00500 per prediction
+  price: 0.005
+  currency: USD
+  period: per-use
+  unit: prediction
+  included_quota: First 400,000 predictions per month
+  overage: Next 800,000 predictions per month $0.00250 per prediction; Over 1,200,000 predictions per
+    month $0.00125 per prediction
+- name: Account Takeover Insights - first 10,000,000 per month
+  price_text: $0.0010 per prediction
+  price: 0.001
+  currency: USD
+  period: per-use
+  unit: prediction
+  included_quota: First 10,000,000 predictions per month
+  overage: Next 90,000,000 $0.0005 per prediction; Over 100,000,000 $0.0003 per prediction
+- name: Model Training
+  price_text: $0.39 per hour
+  price: 0.39
+  currency: USD
+  period: per-use
+  unit: compute hour
+- name: Model Hosting
+  price_text: $0.06 per hour
+  price: 0.06
+  currency: USD
+  period: per-use
+  unit: hour
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units:
+  - compute
+  - data
+  plans:
+  - name: Data Processing and Storage
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - data
+    periods:
+    - other
+  - name: Online Fraud Insights - first 100,000 predictions per month
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Transaction Fraud Insights - first 100,000 predictions per month
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Rule-based Fraud Predictions - first 400,000 per month
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Account Takeover Insights - first 10,000,000 per month
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Model Training
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Model Hosting
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
