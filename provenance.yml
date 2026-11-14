@@ -35,6 +35,12 @@ artifacts:
   capabilities/amazon-fraud-detector-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/amazon-fraud-detector-detectors-api.opencollection.json:
     method: derived
     evidence: openapi/amazon-fraud-detector-detectors-api
@@ -83,6 +89,21 @@ artifacts:
   collections/amazon-fraud-detector.postman_collection.json:
     method: derived
     evidence: openapi/amazon-fraud-detector
+  compliance/amazon-fraud-detector-compliance.yml:
+    method: harvested
+    evidence: declared in the artifact
+  conformance/amazon-fraud-detector-conformance.yml:
+    method: derived
+    evidence: declared in the artifact
+  data-model/amazon-fraud-detector-data-model.yml:
+    method: derived
+    evidence: declared in the artifact
+  eligibility/amazon-fraud-detector-eligibility.yml:
+    method: harvested
+    evidence: declared in the artifact
+  errors/amazon-fraud-detector-problem-types.yml:
+    method: derived
+    evidence: declared in the artifact
   examples/amazon-fraud-detector-detector-example.json:
     method: unknown
     evidence: no authorship recorded
@@ -104,6 +125,9 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  hosts/amazon-fraud-detector-hosts.yml:
+    method: derived
+    evidence: declared in the artifact
   integrations/_index.yml:
     method: generated
     evidence: carries an API Evangelist house phrase
@@ -113,19 +137,217 @@ artifacts:
   json-ld/amazon-fraud-detector-context.jsonld:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-batch-create-variable-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-batch-get-variable-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-cancel-batch-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-cancel-batch-import-job-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-cancel-batch-prediction-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-cancel-batch-prediction-job-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-batch-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-batch-prediction-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-detector-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-detector-version-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-list-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-list-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-model-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-create-variable-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-batch-import-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-batch-prediction-job-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-detector-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-entity-type-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-entity-type-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-event-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-events-by-event-type-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-events-by-event-type-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-external-model-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-external-model-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-list-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-list-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-model-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-delete-outcome-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-describe-model-versions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-fraud-detector-detector-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-fraud-detector-event-type-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-batch-import-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-batch-import-jobs-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-batch-prediction-jobs-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-batch-prediction-jobs-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-detector-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-detector-version-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-entity-types-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-entity-types-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-prediction-metadata-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-prediction-metadata-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-prediction-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-prediction-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-event-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-external-models-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-external-models-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-model-version-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-outcomes-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-outcomes-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-variables-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-get-variables-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-list-event-predictions-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-fraud-detector-model-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-put-entity-type-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-put-entity-type-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-put-external-model-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-put-external-model-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-put-outcome-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-schema/amazon-fraud-detector-rule-schema.json:
     method: unknown
     evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-send-event-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
   json-schema/amazon-fraud-detector-tag-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-detector-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-event-label-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-list-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-list-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-model-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-model-version-result-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-model-version-status-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-rule-version-request-schema.json:
+    method: unknown
+    evidence: no authorship recorded
+  json-schema/amazon-fraud-detector-update-variable-request-schema.json:
     method: unknown
     evidence: no authorship recorded
   json-structure/amazon-fraud-detector-detector-structure.json:
@@ -146,7 +368,7 @@ artifacts:
   kin/checks-2026-10-23T222754.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  kin/checks-2026-11-02T082323.yml:
+  kin/checks-2026-11-06T143934.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-23T000603.yml:
@@ -215,10 +437,21 @@ artifacts:
   kin/score-2026-11-02T082323.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
-  openapi/_original/amazon-fraud-detector-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+  kin/score-2026-11-06T143934.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  lifecycle/amazon-fraud-detector-lifecycle.yml:
+    method: searched
+    evidence: declared in the artifact
+  llms/amazon-fraud-detector-llms-provenance.yml:
+    method: unknown
+    evidence: no authorship recorded
+  llms/amazon-fraud-detector-llms.txt:
+    method: unknown
+    evidence: no authorship recorded
+  mcp/amazon-fraud-detector-mcp.yml:
+    method: derived
+    evidence: declared in the artifact
   openapi/amazon-fraud-detector-batch-import-job-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
@@ -273,16 +506,28 @@ artifacts:
   openapi/amazon-fraud-detector-variable-api-openapi.yml:
     method: unknown
     evidence: no authorship recorded
+  packages/amazon-fraud-detector-packages.yml:
+    method: unknown
+    evidence: no authorship recorded
+  patterns/amazon-fraud-detector-patterns.yml:
+    method: derived
+    evidence: declared in the artifact
   plans/amazon-fraud-detector-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
   postman/amazon-fraud-detector.postman_collection.json:
     method: derived
     evidence: openapi/amazon-fraud-detector
+  privacy/amazon-fraud-detector-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/amazon-fraud-detector-rate-limits.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-fraud-detector-jsonschema-spectral-rules.yml:
+    method: generated
+    evidence: declared in the artifact
+  rules/amazon-fraud-detector-rules.yml:
     method: generated
     evidence: declared in the artifact
   rules/amazon-fraud-detector-spectral-rules.yml:
@@ -301,8 +546,27 @@ artifacts:
     method: generated
     evidence: declared in the artifact
   smithy/frauddetector-2019-11-15.json:
+    method: harvested
+    evidence: byte-identical to https://raw.githubusercontent.com/aws/api-models-aws/3cd98287b471c106254abd89279cc87308d38bfd/models/frauddetector/service/2019-11-15/frauddetector-2019-11-15.json
+      (sha256 b62ca8071df7, fetched 2026-11-11T21:09:54+00:00)
+  terms/amazon-fraud-detector-terms-of-service.yml:
+    method: harvested
+    evidence: declared in the artifact
+  vendors/amazon-fraud-detector-vendors.yml:
     method: unknown
     evidence: no authorship recorded
   vocabulary/amazon-fraud-detector-vocabulary.yaml:
+    method: unknown
+    evidence: no authorship recorded
+  vocabulary/amazon-fraud-detector-vocabulary.yml:
+    method: derived
+    evidence: declared in the artifact
+  well-known/amazon-fraud-detector-midway-auth-openid-configuration.json:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-fraud-detector-security.txt:
+    method: unknown
+    evidence: no authorship recorded
+  well-known/amazon-fraud-detector-well-known.yml:
     method: unknown
     evidence: no authorship recorded
